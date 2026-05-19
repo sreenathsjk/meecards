@@ -246,129 +246,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:64px 48px
   .hero-stats{gap:24px;}
   .ggrid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
   .gscroll{padding:20px;}
-  #editorPanel{width:100%;max-width:100%;border-radius:20px 20px 0 0;bottom:0;top:auto;right:0;max-height:85vh;}
-  #editorOverlay{align-items:flex-end;}
 }
-
-/* EDIT BUTTON */
-.gedit-btn{
-  display:flex;align-items:center;gap:7px;
-  background:var(--surface2);border:1px solid var(--border2);
-  color:var(--text);padding:10px 18px;border-radius:100px;
-  font-size:13px;font-weight:600;cursor:pointer;
-  font-family:'Instrument Sans',sans-serif;transition:all .2s;
-}
-.gedit-btn:hover{border-color:var(--saffron);color:var(--saffron);}
-.gedit-btn:disabled{opacity:.35;cursor:default;border-color:var(--border2);color:var(--muted);}
-
-/* EDITOR OVERLAY */
-#editorOverlay{
-  position:fixed;inset:0;z-index:4000;
-  background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:flex-end;
-}
-#editorPanel{
-  width:400px;max-width:94vw;height:100vh;
-  background:var(--surface);border-left:1px solid var(--border2);
-  display:flex;flex-direction:column;
-  animation:slideInRight .3s cubic-bezier(.25,.8,.25,1);
-}
-@keyframes slideInRight{from{transform:translateX(100%);}to{transform:translateX(0);}}
-
-.ep-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:18px 20px;border-bottom:1px solid var(--border);flex-shrink:0;
-}
-.ep-title{
-  font-family:'Syne',sans-serif;font-weight:700;font-size:17px;
-  display:flex;align-items:center;gap:8px;
-}
-.ep-close{
-  background:var(--surface2);border:1px solid var(--border2);
-  color:var(--muted);width:32px;height:32px;border-radius:50%;
-  font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.ep-close:hover{background:var(--border2);color:var(--text);}
-
-/* PREVIEW */
-.ep-preview-wrap{
-  background:var(--bg);padding:16px;border-bottom:1px solid var(--border);
-  flex-shrink:0;
-}
-.ep-preview-label{
-  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);margin-bottom:10px;
-}
-#epCardWrap .gcard{
-  transform:scale(0.82);transform-origin:top left;
-  margin-bottom:-30px;pointer-events:none;
-  border-radius:14px !important;
-}
-
-/* SCROLL AREA */
-.ep-scroll{
-  flex:1;overflow-y:auto;padding:16px 20px 24px;
-}
-.ep-scroll::-webkit-scrollbar{width:3px;}
-.ep-scroll::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:3px;}
-
-.ep-section{margin-bottom:20px;}
-.ep-section-title{
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--saffron);margin-bottom:12px;padding-bottom:6px;
-  border-bottom:1px solid var(--border);
-}
-.ep-row{
-  display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;
-}
-.ep-label{
-  font-size:12px;color:var(--muted);font-weight:500;min-width:88px;flex-shrink:0;
-}
-.ep-color-input{
-  width:36px;height:36px;border-radius:8px;border:2px solid var(--border2);
-  cursor:pointer;padding:0;background:none;outline:none;
-}
-.ep-color-val{font-size:11px;color:var(--muted);font-family:monospace;}
-.ep-range{
-  flex:1;min-width:80px;accent-color:var(--saffron);cursor:pointer;
-  height:4px;border-radius:4px;
-}
-.ep-range-val{font-size:11px;color:var(--muted);min-width:34px;text-align:right;}
-.ep-select{
-  flex:1;background:var(--surface2);border:1px solid var(--border2);
-  border-radius:8px;padding:8px 10px;color:var(--text);font-size:12px;
-  font-family:'Instrument Sans',sans-serif;outline:none;cursor:pointer;
-  transition:border .2s;
-}
-.ep-select:focus{border-color:var(--saffron);}
-.ep-toggle-row{display:flex;gap:6px;}
-.ep-toggle{
-  padding:6px 14px;border-radius:100px;border:1px solid var(--border2);
-  background:transparent;color:var(--muted);font-size:12px;font-weight:500;
-  cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all .2s;
-}
-.ep-toggle.active{background:var(--saffron);color:#fff;border-color:var(--saffron);}
-
-/* SWATCH ROW */
-.ep-swatch-row{display:flex;gap:7px;flex-wrap:wrap;}
-.ep-swatch{
-  width:28px;height:28px;border-radius:50%;cursor:pointer;
-  border:2px solid transparent;transition:all .18s;flex-shrink:0;
-}
-.ep-swatch:hover{transform:scale(1.2);border-color:rgba(255,255,255,.4);}
-.ep-swatch.active{border-color:#fff;transform:scale(1.15);}
-
-/* APPLY BUTTON */
-.ep-apply-btn{
-  width:100%;background:linear-gradient(135deg,var(--saffron),var(--gold));
-  color:#fff;border:none;padding:14px;border-radius:12px;
-  font-size:15px;font-weight:700;cursor:pointer;
-  font-family:'Syne',sans-serif;transition:all .25s;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  margin-top:8px;
-}
-.ep-apply-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(255,107,0,0.4);}
 </style>
 </head>
 <body>
@@ -611,201 +489,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:64px 48px
   <div class="gscroll"><div class="ggrid" id="ggrid"></div></div>
   <div class="gfooter">
     <div class="gsel-info" id="gselInfo">👆 Click any card to select your favourite design</div>
-    <div style="display:flex;gap:10px;align-items:center;">
-      <button class="gedit-btn" id="geditBtn" disabled onclick="openEditor()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-        Edit Card
-      </button>
-      <button class="gproceed" id="gproceedBtn" disabled onclick="openPaymentModal()">Download This Card →</button>
-    </div>
-  </div>
-</div>
-
-<!-- ─── CARD EDITOR PANEL ─── -->
-<div id="editorOverlay" style="display:none;">
-  <div id="editorPanel">
-    <div class="ep-header">
-      <div class="ep-title">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color:var(--saffron)"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-        Customise Card
-      </div>
-      <button class="ep-close" onclick="closeEditor()">✕</button>
-    </div>
-
-    <!-- LIVE PREVIEW -->
-    <div class="ep-preview-wrap">
-      <div class="ep-preview-label">Live Preview</div>
-      <div id="epCardWrap"></div>
-    </div>
-
-    <div class="ep-scroll">
-
-      <!-- BACKGROUND -->
-      <div class="ep-section">
-        <div class="ep-section-title">🎨 Background</div>
-        <div class="ep-row">
-          <label class="ep-label">Type</label>
-          <div class="ep-toggle-row">
-            <button class="ep-toggle active" id="bgSolidBtn" onclick="setBgType('solid',this)">Solid</button>
-            <button class="ep-toggle" id="bgGradBtn" onclick="setBgType('gradient',this)">Gradient</button>
-          </div>
-        </div>
-        <div class="ep-row" id="bgSolidRow">
-          <label class="ep-label">Colour</label>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <input type="color" id="ep_bgColor" value="#0a0a14" oninput="applyEditorLive()" class="ep-color-input"/>
-            <span class="ep-color-val" id="ep_bgColorVal">#0a0a14</span>
-          </div>
-        </div>
-        <div id="bgGradRow" style="display:none;">
-          <div class="ep-row">
-            <label class="ep-label">Colour 1</label>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <input type="color" id="ep_grad1" value="#0a0a14" oninput="applyEditorLive()" class="ep-color-input"/>
-              <span class="ep-color-val" id="ep_grad1Val">#0a0a14</span>
-            </div>
-          </div>
-          <div class="ep-row">
-            <label class="ep-label">Colour 2</label>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <input type="color" id="ep_grad2" value="#12122a" oninput="applyEditorLive()" class="ep-color-input"/>
-              <span class="ep-color-val" id="ep_grad2Val">#12122a</span>
-            </div>
-          </div>
-          <div class="ep-row">
-            <label class="ep-label">Angle</label>
-            <input type="range" id="ep_gradAngle" min="0" max="360" value="135" oninput="document.getElementById('ep_gradAngleVal').textContent=this.value+'°';applyEditorLive()" class="ep-range"/>
-            <span class="ep-range-val" id="ep_gradAngleVal">135°</span>
-          </div>
-        </div>
-        <!-- Quick BG presets -->
-        <div class="ep-row">
-          <label class="ep-label">Presets</label>
-          <div class="ep-swatch-row" id="bgPresets"></div>
-        </div>
-      </div>
-
-      <!-- TYPOGRAPHY -->
-      <div class="ep-section">
-        <div class="ep-section-title">✏️ Typography</div>
-        <div class="ep-row">
-          <label class="ep-label">Font Family</label>
-          <select id="ep_font" onchange="applyEditorLive()" class="ep-select">
-            <option value="'Syne', sans-serif">Syne (Bold / Modern)</option>
-            <option value="'Instrument Sans', sans-serif">Instrument Sans (Clean)</option>
-            <option value="Georgia, serif">Georgia (Classic Serif)</option>
-            <option value="'Courier New', monospace">Courier New (Mono / Tech)</option>
-            <option value="'Arial', sans-serif">Arial (Simple)</option>
-            <option value="'Trebuchet MS', sans-serif">Trebuchet MS (Friendly)</option>
-            <option value="'Palatino', serif">Palatino (Elegant)</option>
-            <option value="impact, sans-serif">Impact (Strong)</option>
-          </select>
-        </div>
-        <div class="ep-row">
-          <label class="ep-label">Name Size</label>
-          <input type="range" id="ep_nameSize" min="11" max="24" value="16" oninput="document.getElementById('ep_nameSzVal').textContent=this.value+'px';applyEditorLive()" class="ep-range"/>
-          <span class="ep-range-val" id="ep_nameSzVal">16px</span>
-        </div>
-        <div class="ep-row">
-          <label class="ep-label">Body Size</label>
-          <input type="range" id="ep_bodySize" min="8" max="16" value="11" oninput="document.getElementById('ep_bodySzVal').textContent=this.value+'px';applyEditorLive()" class="ep-range"/>
-          <span class="ep-range-val" id="ep_bodySzVal">11px</span>
-        </div>
-      </div>
-
-      <!-- COLOURS -->
-      <div class="ep-section">
-        <div class="ep-section-title">🖌️ Text & Accent</div>
-        <div class="ep-row">
-          <label class="ep-label">Text Colour</label>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <input type="color" id="ep_textColor" value="#f0eee8" oninput="applyEditorLive()" class="ep-color-input"/>
-            <span class="ep-color-val" id="ep_textColorVal">#f0eee8</span>
-          </div>
-        </div>
-        <div class="ep-row">
-          <label class="ep-label">Accent Colour</label>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <input type="color" id="ep_accentColor" value="#FF6B00" oninput="applyEditorLive()" class="ep-color-input"/>
-            <span class="ep-color-val" id="ep_accentColorVal">#FF6B00</span>
-          </div>
-        </div>
-        <!-- Quick text presets -->
-        <div class="ep-row">
-          <label class="ep-label">Accent Presets</label>
-          <div class="ep-swatch-row" id="accentPresets"></div>
-        </div>
-      </div>
-
-      <!-- CARD STYLE -->
-      <div class="ep-section">
-        <div class="ep-section-title">📐 Card Style</div>
-        <div class="ep-row">
-          <label class="ep-label">Corner Radius</label>
-          <input type="range" id="ep_radius" min="0" max="32" value="18" oninput="document.getElementById('ep_radiusVal').textContent=this.value+'px';applyEditorLive()" class="ep-range"/>
-          <span class="ep-range-val" id="ep_radiusVal">18px</span>
-        </div>
-        <div class="ep-row">
-          <label class="ep-label">Pattern</label>
-          <select id="ep_pattern" onchange="applyEditorLive()" class="ep-select">
-            <option value="0">Circles</option>
-            <option value="1">Diagonal Lines</option>
-            <option value="2">Triangle</option>
-            <option value="3">Wave</option>
-            <option value="4">Rectangle</option>
-            <option value="5">Two Circles</option>
-            <option value="6">Arc</option>
-            <option value="7">Hexagon</option>
-            <option value="8">None</option>
-            <option value="9">Cross Lines</option>
-          </select>
-        </div>
-        <div class="ep-row">
-          <label class="ep-label">Shadow</label>
-          <div class="ep-toggle-row">
-            <button class="ep-toggle active" id="shadowOnBtn" onclick="setShadow(true,this)">On</button>
-            <button class="ep-toggle" id="shadowOffBtn" onclick="setShadow(false,this)">Off</button>
-          </div>
-        </div>
-        <div class="ep-row">
-          <label class="ep-label">Border</label>
-          <div class="ep-toggle-row">
-            <button class="ep-toggle" id="borderOnBtn" onclick="setBorder(true,this)">Show</button>
-            <button class="ep-toggle active" id="borderOffBtn" onclick="setBorder(false,this)">Hide</button>
-          </div>
-        </div>
-        <div class="ep-row" id="borderColorRow" style="display:none;">
-          <label class="ep-label">Border Colour</label>
-          <input type="color" id="ep_borderColor" value="#FF6B00" oninput="applyEditorLive()" class="ep-color-input"/>
-        </div>
-      </div>
-
-      <!-- LAYOUT -->
-      <div class="ep-section">
-        <div class="ep-section-title">🗂️ Layout</div>
-        <div class="ep-row">
-          <label class="ep-label">Style</label>
-          <select id="ep_layout" onchange="applyEditorLive()" class="ep-select">
-            <option value="standard">Standard</option>
-            <option value="compact">Compact</option>
-            <option value="wide-avatar">Wide Avatar</option>
-            <option value="minimal">Minimal</option>
-            <option value="bold-name">Bold Name</option>
-            <option value="centered">Centered</option>
-            <option value="split">Split</option>
-            <option value="pill-contacts">Pill Contacts</option>
-            <option value="icon-row">Icon Row</option>
-            <option value="sidebar">Sidebar</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- APPLY BUTTON -->
-      <button class="ep-apply-btn" onclick="applyToCard()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-        Apply & Close
-      </button>
-    </div>
+    <button class="gproceed" id="gproceedBtn" disabled onclick="openPaymentModal()">Download This Card →</button>
   </div>
 </div>
 
@@ -1215,312 +899,342 @@ function selectCard(idx){
   if(el) el.classList.add('chosen');
   selectedIdx=idx;
   document.getElementById('gproceedBtn').disabled=false;
-  document.getElementById('geditBtn').disabled=false;
-  document.getElementById('gselInfo').innerHTML=`<em>Design #${idx+1}</em> selected — edit or download your card!`;
+  document.getElementById('gselInfo').innerHTML=`<em>Design #${idx+1}</em> selected — click the button to get your card!`;
 }
 
-// ─── EDITOR STATE ───
-let editorState={
-  bgType:'gradient',
-  bgColor:'#0a0a14',
-  grad1:'#0a0a14',
-  grad2:'#12122a',
-  gradAngle:135,
-  textColor:'#f0eee8',
-  accentColor:'#FF6B00',
-  font:"'Syne', sans-serif",
-  nameSize:16,
-  bodySize:11,
-  radius:18,
-  pattern:0,
-  shadow:true,
-  border:false,
-  borderColor:'#FF6B00',
-  layout:'standard'
-};
-
-const BG_PRESETS=[
-  '#0a0a14','#FF6B00','#00796B','#1a1200','#0D0D1A',
-  '#1a0810','#001a33','#0a1a0a','#181818','#2d0a0a',
-  '#0a0a2d','#002d2d','#1a0022','#00100a','#1f1008',
-];
-const ACCENT_PRESETS=[
-  '#FF6B00','#D4A017','#00C9A7','#b39ddb','#ff6b9d',
-  '#66b3ff','#66ff66','#ffffff','#ff6666','#6666ff',
-  '#00e5e5','#dd66ff','#00e87a','#ff9933','#00d4d4',
-];
-
-function openEditor(){
-  if(selectedIdx<0) return;
-
-  // Seed editor state from selected card's palette
-  const pIdx=Math.floor(selectedIdx/LAYOUTS.length);
-  const lIdx=selectedIdx % LAYOUTS.length;
-  const [bg,tc,ac]=PALETTES[pIdx%PALETTES.length];
-
-  // parse bg into state
-  if(bg.includes('gradient')){
-    editorState.bgType='gradient';
-    const stops=parseGradientStops(bg);
-    editorState.grad1=stops[0]?.color||'#0a0a14';
-    editorState.grad2=stops[stops.length-1]?.color||'#12122a';
-    editorState.gradAngle=parseGradientAngle(bg);
-  } else {
-    editorState.bgType='solid';
-    editorState.bgColor=bg;
+// ─── PAYMENT ───
+let selPlan='pro';
+function openPaymentModal(){
+  closeGallery();
+  document.getElementById('downloadProgress').style.display='none';
+  document.getElementById('progFill').style.width='0%';
+  const btn=document.getElementById('payBtn');
+  btn.disabled=false;
+  btn.textContent='Pay ₹99 with Razorpay / UPI →';
+  // reset to pro selected
+  selPlan='pro';
+  document.querySelectorAll('.plan-card').forEach(c=>{
+    c.classList.remove('selected');
+    c.querySelector('.plan-radio').style.background='';
+    c.querySelector('.plan-radio').style.borderColor='';
+  });
+  const proCard=document.querySelectorAll('.plan-card')[1];
+  if(proCard){
+    proCard.classList.add('selected');
+    proCard.querySelector('.plan-radio').style.background='var(--saffron)';
+    proCard.querySelector('.plan-radio').style.borderColor='var(--saffron)';
   }
-  editorState.textColor=tc.startsWith('#')?tc:'#f0eee8';
-  editorState.accentColor=ac.startsWith('#')?ac:'#FF6B00';
-  editorState.layout=LAYOUTS[lIdx];
-
-  // Set UI values
-  setEditorUI();
-
-  // Build swatches
-  buildSwatches();
-
-  // Render preview
-  renderEditorPreview();
-
-  document.getElementById('editorOverlay').style.display='flex';
+  document.getElementById('paymentModal').classList.add('open');
   document.body.style.overflow='hidden';
 }
-
-function setEditorUI(){
-  const s=editorState;
-  // bg type
-  setBgTypeUI(s.bgType);
-  document.getElementById('ep_bgColor').value=s.bgColor;
-  document.getElementById('ep_bgColorVal').textContent=s.bgColor;
-  document.getElementById('ep_grad1').value=s.grad1;
-  document.getElementById('ep_grad1Val').textContent=s.grad1;
-  document.getElementById('ep_grad2').value=s.grad2;
-  document.getElementById('ep_grad2Val').textContent=s.grad2;
-  document.getElementById('ep_gradAngle').value=s.gradAngle;
-  document.getElementById('ep_gradAngleVal').textContent=s.gradAngle+'°';
-  document.getElementById('ep_textColor').value=s.textColor;
-  document.getElementById('ep_textColorVal').textContent=s.textColor;
-  document.getElementById('ep_accentColor').value=s.accentColor;
-  document.getElementById('ep_accentColorVal').textContent=s.accentColor;
-  document.getElementById('ep_font').value=s.font;
-  document.getElementById('ep_nameSize').value=s.nameSize;
-  document.getElementById('ep_nameSzVal').textContent=s.nameSize+'px';
-  document.getElementById('ep_bodySize').value=s.bodySize;
-  document.getElementById('ep_bodySzVal').textContent=s.bodySize+'px';
-  document.getElementById('ep_radius').value=s.radius;
-  document.getElementById('ep_radiusVal').textContent=s.radius+'px';
-  document.getElementById('ep_pattern').value=s.pattern;
-  document.getElementById('ep_layout').value=s.layout;
-  // shadow / border toggles
-  setShadowUI(s.shadow);
-  setBorderUI(s.border);
+function closePaymentModal(){
+  document.getElementById('paymentModal').classList.remove('open');
+  document.body.style.overflow='';
 }
-
-function buildSwatches(){
-  // BG presets
-  const bgWrap=document.getElementById('bgPresets');
-  bgWrap.innerHTML='';
-  BG_PRESETS.forEach(c=>{
-    const s=document.createElement('div');
-    s.className='ep-swatch';
-    s.style.background=c;
-    if(c===editorState.bgColor||c===editorState.grad1) s.classList.add('active');
-    s.onclick=()=>{
-      if(editorState.bgType==='solid') editorState.bgColor=c;
-      else { editorState.grad1=c; document.getElementById('ep_grad1').value=c; document.getElementById('ep_grad1Val').textContent=c; }
-      document.getElementById('ep_bgColor').value=c;
-      document.getElementById('ep_bgColorVal').textContent=c;
-      bgWrap.querySelectorAll('.ep-swatch').forEach(x=>x.classList.remove('active'));
-      s.classList.add('active');
-      applyEditorLive();
-    };
-    bgWrap.appendChild(s);
+function selectPlan(el,plan){
+  selPlan=plan;
+  document.querySelectorAll('.plan-card').forEach(c=>{
+    c.classList.remove('selected');
+    c.querySelector('.plan-radio').style.background='';
+    c.querySelector('.plan-radio').style.borderColor='';
   });
+  el.classList.add('selected');
+  el.querySelector('.plan-radio').style.background='var(--saffron)';
+  el.querySelector('.plan-radio').style.borderColor='var(--saffron)';
+  const btn=document.getElementById('payBtn');
+  if(plan==='free') btn.textContent='Download My Card — Free →';
+  else if(plan==='pro') btn.textContent='Pay ₹99 with Razorpay / UPI →';
+  else btn.textContent='Pay ₹398 with Razorpay / UPI →';
+}
 
-  // Accent presets
-  const acWrap=document.getElementById('accentPresets');
-  acWrap.innerHTML='';
-  ACCENT_PRESETS.forEach(c=>{
-    const s=document.createElement('div');
-    s.className='ep-swatch';
-    s.style.background=c;
-    if(c===editorState.accentColor) s.classList.add('active');
-    s.onclick=()=>{
-      editorState.accentColor=c;
-      document.getElementById('ep_accentColor').value=c;
-      document.getElementById('ep_accentColorVal').textContent=c;
-      acWrap.querySelectorAll('.ep-swatch').forEach(x=>x.classList.remove('active'));
-      s.classList.add('active');
-      applyEditorLive();
-    };
-    acWrap.appendChild(s);
+// ─── REAL CARD DOWNLOAD via Canvas ───
+function handlePayment(){
+  if(selPlan==='free'){
+    downloadCard();
+  } else {
+    // Razorpay placeholder — replace with real SDK call
+    alert('🔗 Redirecting to Razorpay...\n\nIntegrate Razorpay SDK here.\nAfter payment success → call downloadCard()');
+  }
+}
+
+function downloadCard(){
+  const btn=document.getElementById('payBtn');
+  btn.disabled=true;
+  btn.textContent='Generating card...';
+  const prog=document.getElementById('downloadProgress');
+  const fill=document.getElementById('progFill');
+  const msg=document.getElementById('downloadMsg');
+  prog.style.display='block';
+
+  // Animate progress bar
+  let pct=0;
+  const ticker=setInterval(()=>{
+    pct=Math.min(pct+Math.random()*18,90);
+    fill.style.width=pct+'%';
+  },120);
+
+  // Use html2canvas on the selected card element
+  const cardEl=document.getElementById('gc'+selectedIdx);
+  if(!cardEl){
+    clearInterval(ticker);
+    prog.style.display='none';
+    btn.disabled=false;
+    btn.textContent='Download My Card — Free →';
+    alert('Please select a card first from the gallery.');
+    return;
+  }
+
+  msg.textContent='Rendering your card...';
+
+  // Draw the card onto a canvas manually (no external lib needed)
+  renderCardToCanvas(cardEl, (dataUrl)=>{
+    clearInterval(ticker);
+    fill.style.width='100%';
+    msg.textContent='✅ Card ready! Downloading...';
+
+    setTimeout(()=>{
+      const a=document.createElement('a');
+      a.href=dataUrl;
+      const u=getUD();
+      a.download=`TapID_${u.name.replace(/\s+/g,'_')}.png`;
+      a.click();
+
+      setTimeout(()=>{
+        prog.style.display='none';
+        fill.style.width='0%';
+        btn.disabled=false;
+        btn.textContent='Download My Card — Free →';
+        closePaymentModal();
+      },1200);
+    },400);
   });
 }
 
-function setBgType(type,btn){
-  editorState.bgType=type;
-  setBgTypeUI(type);
-  applyEditorLive();
-}
-function setBgTypeUI(type){
-  document.getElementById('bgSolidBtn').classList.toggle('active',type==='solid');
-  document.getElementById('bgGradBtn').classList.toggle('active',type==='gradient');
-  document.getElementById('bgSolidRow').style.display=type==='solid'?'flex':'none';
-  document.getElementById('bgGradRow').style.display=type==='gradient'?'block':'none';
-}
-function setShadow(val,btn){
-  editorState.shadow=val;
-  setShadowUI(val);
-  applyEditorLive();
-}
-function setShadowUI(val){
-  document.getElementById('shadowOnBtn').classList.toggle('active',val);
-  document.getElementById('shadowOffBtn').classList.toggle('active',!val);
-}
-function setBorder(val,btn){
-  editorState.border=val;
-  setBorderUI(val);
-  applyEditorLive();
-}
-function setBorderUI(val){
-  document.getElementById('borderOnBtn').classList.toggle('active',val);
-  document.getElementById('borderOffBtn').classList.toggle('active',!val);
-  document.getElementById('borderColorRow').style.display=val?'flex':'none';
-}
-
-function readEditorUI(){
-  editorState.bgColor=document.getElementById('ep_bgColor').value;
-  editorState.grad1=document.getElementById('ep_grad1').value;
-  editorState.grad2=document.getElementById('ep_grad2').value;
-  editorState.gradAngle=parseInt(document.getElementById('ep_gradAngle').value);
-  editorState.textColor=document.getElementById('ep_textColor').value;
-  editorState.accentColor=document.getElementById('ep_accentColor').value;
-  editorState.font=document.getElementById('ep_font').value;
-  editorState.nameSize=parseInt(document.getElementById('ep_nameSize').value);
-  editorState.bodySize=parseInt(document.getElementById('ep_bodySize').value);
-  editorState.radius=parseInt(document.getElementById('ep_radius').value);
-  editorState.pattern=parseInt(document.getElementById('ep_pattern').value);
-  editorState.layout=document.getElementById('ep_layout').value;
-  editorState.borderColor=document.getElementById('ep_borderColor').value;
-  // update value labels
-  document.getElementById('ep_bgColorVal').textContent=editorState.bgColor;
-  document.getElementById('ep_textColorVal').textContent=editorState.textColor;
-  document.getElementById('ep_accentColorVal').textContent=editorState.accentColor;
-}
-
-function getEditorBg(){
-  const s=editorState;
-  if(s.bgType==='solid') return s.bgColor;
-  return `linear-gradient(${s.gradAngle}deg,${s.grad1},${s.grad2})`;
-}
-
-function applyEditorLive(){
-  readEditorUI();
-  renderEditorPreview();
-}
-
-function renderEditorPreview(){
-  const s=editorState;
+function renderCardToCanvas(cardEl, callback){
+  const W=700, H=400;
+  const canvas=document.createElement('canvas');
+  canvas.width=W; canvas.height=H;
+  const ctx=canvas.getContext('2d');
   const u=getUD();
-  const bg=getEditorBg();
-  const pat=PATTERNS[s.pattern]||'';
 
-  // Override palette for this card with editor values
-  const customPalette=[bg,s.textColor,s.accentColor,`rgba(128,128,128,0.2)`];
+  // Get palette from selectedIdx
+  const pIdx=Math.floor(selectedIdx/LAYOUTS.length);
+  const [bg,tc,ac,ab]=PALETTES[pIdx%PALETTES.length];
 
-  // Build the card HTML using layout
-  const lIdx=LAYOUTS.indexOf(s.layout)>=0?LAYOUTS.indexOf(s.layout):0;
-  // Temporarily override PALETTES[0] — use a throwaway build
-  const {inner}=buildCardCustom(customPalette,s.layout,u,s);
+  // --- Background ---
+  if(bg.startsWith('linear-gradient')||bg.startsWith('radial-gradient')){
+    // Parse gradient stops for canvas
+    const stops=parseGradientStops(bg);
+    let grad;
+    if(bg.startsWith('radial')){
+      grad=ctx.createRadialGradient(W*0.3,H*0.3,0,W*0.5,H*0.5,W*0.7);
+    } else {
+      // linear — parse angle
+      const angle=parseGradientAngle(bg);
+      const rad=angle*Math.PI/180;
+      const x1=W/2-Math.cos(rad)*W/2, y1=H/2-Math.sin(rad)*H/2;
+      const x2=W/2+Math.cos(rad)*W/2, y2=H/2+Math.sin(rad)*H/2;
+      grad=ctx.createLinearGradient(x1,y1,x2,y2);
+    }
+    stops.forEach(s=>grad.addColorStop(s.pos,s.color));
+    ctx.fillStyle=grad;
+  } else {
+    ctx.fillStyle=bg;
+  }
+  ctx.roundRect(0,0,W,H,28);
+  ctx.fill();
 
-  const shadow=s.shadow?'0 16px 48px rgba(0,0,0,0.6)':'none';
-  const border=s.border?`2px solid ${s.borderColor}`:'none';
+  // --- Subtle pattern overlay: circles ---
+  ctx.save();
+  ctx.globalAlpha=0.06;
+  ctx.fillStyle='#ffffff';
+  ctx.beginPath(); ctx.arc(W*0.82,H*0.15,110,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(W*0.08,H*0.82,80,0,Math.PI*2); ctx.fill();
+  ctx.restore();
 
-  const wrap=document.getElementById('epCardWrap');
-  wrap.innerHTML=`
-    <div class="gcard" style="background:${bg};box-shadow:${shadow};border:${border};border-radius:${s.radius}px;font-family:${s.font};pointer-events:none;">
-      <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">${pat}</svg>
-      ${NFC}
-      ${inner}
-    </div>`;
+  // --- NFC chip (top right) ---
+  ctx.save();
+  ctx.globalAlpha=0.35;
+  ctx.strokeStyle='rgba(255,255,255,0.6)';
+  ctx.lineWidth=1.5;
+  ctx.roundRect(W-68,18,42,32,4);
+  ctx.stroke();
+  // inner segments
+  ctx.fillStyle='rgba(255,255,255,0.5)';
+  [[W-64,22,16,12],[W-44,22,16,12],[W-64,38,16,10],[W-44,38,16,10]].forEach(([x,y,w,h])=>{
+    ctx.fillRect(x,y,w,h);
+  });
+  ctx.restore();
+
+  // --- Avatar ---
+  const avX=40, avY=40, avR=52;
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(avX+avR/2,avY+avR/2,avR/2,0,Math.PI*2);
+  ctx.fillStyle=ab;
+  ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,0.2)';
+  ctx.lineWidth=2;
+  ctx.stroke();
+  ctx.clip();
+  if(userPhoto){
+    try{
+      const img=new Image();
+      img.src=userPhoto;
+      ctx.drawImage(img,avX,avY,avR,avR);
+    } catch(e){ drawAvatarEmoji(ctx,avX,avY,avR); }
+  } else {
+    drawAvatarEmoji(ctx,avX,avY,avR);
+  }
+  ctx.restore();
+
+  // --- Name, Role, Company ---
+  const tx=avX+avR+20;
+  ctx.fillStyle=tc;
+  ctx.font=`700 ${W*0.048}px Syne, sans-serif`;
+  ctx.fillText(clip(u.name,22), tx, avY+22);
+  ctx.globalAlpha=0.7;
+  ctx.font=`500 ${W*0.028}px Instrument Sans, sans-serif`;
+  ctx.fillStyle=ac;
+  ctx.fillText(clip(u.role,26), tx, avY+44);
+  ctx.globalAlpha=0.45;
+  ctx.fillStyle=tc;
+  ctx.font=`italic ${W*0.024}px Instrument Sans, sans-serif`;
+  ctx.fillText(clip(u.co,30), tx, avY+62);
+  ctx.globalAlpha=1;
+
+  // --- Divider ---
+  const dy=avY+avR+24;
+  ctx.strokeStyle='rgba(255,255,255,0.1)';
+  ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(40,dy); ctx.lineTo(W-40,dy); ctx.stroke();
+
+  // --- Contact rows ---
+  ctx.fillStyle=tc;
+  const rows=[
+    ['📞', u.phone],
+    ['✉', u.email],
+    ['🌐', u.web],
+  ];
+  if(u.wa) rows.push(['💬', 'WhatsApp: '+u.wa]);
+  rows.forEach(([icon,val],i)=>{
+    const ry=dy+28+i*34;
+    ctx.globalAlpha=0.75-i*0.08;
+    ctx.font=`${W*0.026}px Instrument Sans, sans-serif`;
+    ctx.fillText(icon+' '+clip(val,40), 44, ry);
+  });
+  ctx.globalAlpha=1;
+
+  // --- QR block (bottom right) ---
+  const qx=W-110, qy=H-110, qs=80;
+  ctx.save();
+  ctx.globalAlpha=0.18;
+  ctx.fillStyle='#ffffff';
+  ctx.roundRect(qx,qy,qs,qs,10);
+  ctx.fill();
+  ctx.restore();
+  // draw mini QR pattern
+  drawMiniQR(ctx,qx+8,qy+8,qs-16,tc);
+
+  // --- TAPID.IN brand ---
+  ctx.globalAlpha=0.3;
+  ctx.fillStyle=tc;
+  ctx.font=`700 ${W*0.018}px Syne, sans-serif`;
+  ctx.letterSpacing='3px';
+  ctx.fillText('TAPID.IN', W-108, H-14);
+  ctx.globalAlpha=1;
+
+  // --- WhatsApp pill (bottom left) ---
+  if(u.wa){
+    ctx.save();
+    ctx.fillStyle='rgba(37,211,102,0.15)';
+    ctx.strokeStyle='rgba(37,211,102,0.35)';
+    ctx.lineWidth=1;
+    ctx.roundRect(40,H-50,160,30,100);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#25D366';
+    ctx.font=`600 ${W*0.022}px Instrument Sans, sans-serif`;
+    ctx.fillText('● WhatsApp', 60, H-30);
+    ctx.restore();
+  }
+
+  callback(canvas.toDataURL('image/png'));
 }
 
-function buildCardCustom(palette,lo,u,s){
-  const [bg,tc,ac,ab]=palette;
-  const nm_sz=s.nameSize+'px';
-  const body_sz=s.bodySize+'px';
-  const av_sz= lo==='compact'?'36px': lo==='wide-avatar'||lo==='bold-name'?'56px':'46px';
-  const br= lo==='pill-contacts'||lo==='wide-avatar'?'10px':'50%';
+function clip(str,max){ return str&&str.length>max?str.slice(0,max-1)+'…':str||''; }
 
-  // reuse existing buildCard but inject custom sizes
-  // We temporarily override palette variables and call inner builder
-  const origPalette=PALETTES[0];
-  PALETTES[0]=palette;
-  // patch nm_sz into inline styles via a proxy — simplest: rebuild inline
-  let inner='';
+function drawAvatarEmoji(ctx,x,y,size){
+  ctx.font=`${size*0.55}px serif`;
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.globalAlpha=0.7;
+  ctx.fillStyle='rgba(255,255,255,0.8)';
+  ctx.fillText('👤',x+size/2,y+size/2);
+  ctx.textAlign='left';
+  ctx.textBaseline='alphabetic';
+  ctx.globalAlpha=1;
+}
 
-  // Helper with custom sizes
-  const avH=(sz,border_r,bg_av,extra)=>{
-    const img=userPhoto?`<img src="${userPhoto}" style="width:100%;height:100%;object-fit:cover;border-radius:${border_r};" />`:`<span style="font-size:${parseInt(sz)*0.42}px;">👤</span>`;
-    return `<div style="width:${sz};height:${sz};border-radius:${border_r};background:${bg_av};border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;font-family:${s.font};${extra||''}">${img}</div>`;
+function drawMiniQR(ctx,x,y,size,color){
+  // Draw a simple static QR-like pattern
+  ctx.save();
+  ctx.fillStyle=color;
+  ctx.globalAlpha=0.7;
+  const cell=size/7;
+  // finder patterns (3 corners)
+  [[0,0],[4,0],[0,4]].forEach(([cx,cy])=>{
+    ctx.strokeStyle=color;
+    ctx.lineWidth=cell*0.15;
+    ctx.strokeRect(x+cx*cell,y+cy*cell,cell*3,cell*3);
+    ctx.fillRect(x+(cx+1)*cell,y+(cy+1)*cell,cell,cell);
+  });
+  // random data cells
+  const cells=[[1,3],[2,4],[3,3],[4,2],[5,3],[3,5],[5,5],[4,4],[6,1],[6,3],[6,5],[2,6],[4,6]];
+  cells.forEach(([cx,cy])=>ctx.fillRect(x+cx*cell+1,y+cy*cell+1,cell-2,cell-2));
+  ctx.restore();
+}
+
+function parseGradientStops(grad){
+  // Extract hex/rgb colors from gradient string
+  const colors=[];
+  const matches=grad.match(/#[0-9a-fA-F]{3,6}|rgb\([^)]+\)|rgba\([^)]+\)/g)||['#0a0a14','#12122a'];
+  matches.forEach((c,i)=>colors.push({pos:i/(Math.max(matches.length-1,1)),color:c}));
+  return colors;
+}
+
+function parseGradientAngle(grad){
+  const m=grad.match(/(\d+)deg/);
+  return m?parseInt(m[1]):135;
+}
+
+document.getElementById('paymentModal').addEventListener('click',function(e){if(e.target===this)closePaymentModal();});
+
+// ─── FAQ ───
+function toggleFaq(el){
+  const item=el.parentElement;
+  const open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!open) item.classList.add('open');
+}
+
+// ─── roundRect polyfill for older browsers ───
+if(!CanvasRenderingContext2D.prototype.roundRect){
+  CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){
+    r=Math.min(r,w/2,h/2);
+    this.beginPath();
+    this.moveTo(x+r,y);
+    this.lineTo(x+w-r,y);
+    this.quadraticCurveTo(x+w,y,x+w,y+r);
+    this.lineTo(x+w,y+h-r);
+    this.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    this.lineTo(x+r,y+h);
+    this.quadraticCurveTo(x,y+h,x,y+h-r);
+    this.lineTo(x,y+r);
+    this.quadraticCurveTo(x,y,x+r,y);
+    this.closePath();
+    return this;
   };
-
-  const nameStyle=`font-weight:700;font-size:${nm_sz};color:${tc};line-height:1.2;font-family:${s.font};`;
-  const roleStyle=`font-size:${body_sz};color:${ac};font-weight:600;margin:2px 0;font-family:${s.font};`;
-  const coStyle=`font-size:${Math.max(8,s.bodySize-2)}px;opacity:.45;color:${tc};font-style:italic;font-family:${s.font};`;
-  const contactStyle=`font-size:${body_sz};color:${tc};opacity:.75;font-family:${s.font};`;
-  const waBtn=u.wa?`<div style="display:inline-flex;align-items:center;gap:4px;background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.28);border-radius:100px;padding:4px 10px;font-size:${Math.max(8,s.bodySize-1)}px;font-weight:600;color:#25D366;font-family:${s.font};">WhatsApp</div>`:'';
-
-  if(lo==='centered'){
-    inner=`<div style="text-align:center;position:relative;z-index:2;">
-      ${avH(av_sz,'50%',ab,'display:inline-flex;margin-bottom:10px;')}
-      <div style="${nameStyle}">${u.name}</div>
-      <div style="${roleStyle}">${u.role}</div>
-      <div style="${coStyle}">${u.co}</div>
-      <div style="height:1px;background:rgba(255,255,255,.1);margin:10px 0;"></div>
-      <div style="${contactStyle};margin-bottom:3px;">${u.phone}</div>
-      <div style="font-size:${Math.max(8,s.bodySize-1)}px;color:${tc};opacity:.6;font-family:${s.font};">${u.email}</div>
-      <div style="margin-top:10px;display:flex;justify-content:center;gap:10px;align-items:center;">
-        <span style="font-size:7px;opacity:.3;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>${waBtn}
-      </div></div>`;
-  } else if(lo==='minimal'){
-    inner=`<div style="position:relative;z-index:2;">
-      <div style="font-family:${s.font};font-weight:800;font-size:${nm_sz};color:${tc};letter-spacing:-.5px;">${u.name}</div>
-      <div style="${roleStyle}">${u.role}</div>
-      <div style="${coStyle};margin-bottom:14px;">${u.co}</div>
-      <div style="height:1px;background:rgba(255,255,255,.08);margin-bottom:12px;"></div>
-      <div style="${contactStyle};margin-bottom:4px;">${u.phone}</div>
-      <div style="font-size:${Math.max(8,s.bodySize-1)}px;color:${tc};opacity:.58;font-family:${s.font};margin-bottom:4px;">${u.email}</div>
-      <div style="font-size:${Math.max(8,s.bodySize-1)}px;color:${tc};opacity:.45;font-family:${s.font};">${u.web}</div>
-      <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:7px;opacity:.3;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>
-        ${u.wa?`<span style="font-size:${body_sz};color:#25D366;font-weight:600;font-family:${s.font};">● WhatsApp</span>`:''}
-      </div></div>`;
-  } else if(lo==='bold-name'){
-    inner=`<div style="position:relative;z-index:2;">
-      <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;">
-        ${avH(av_sz,'12px',ab,'')}
-        <div>
-          <div style="font-family:${s.font};font-weight:800;font-size:${nm_sz};color:${tc};letter-spacing:-.5px;line-height:1.1;">${u.name}</div>
-          <div style="${roleStyle}">${u.role}</div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:9px 12px;margin-bottom:10px;">
-        <div style="${contactStyle};margin-bottom:4px;">${u.phone}</div>
-        <div style="font-size:${Math.max(8,s.bodySize-1)}px;color:${tc};opacity:.6;font-family:${s.font};">${u.email}</div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:7px;opacity:.28;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>${waBtn}
-      </div></div>`;
-  } else if(lo==='split'){
-    inner=`<div style="position:relative;z-index:2;display:flex;gap:12px;">
-      <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px;border-right:1px solid rgba(255,255,255,.08);padding-right:12px;width:62px;">
-        ${avH('44px','50%',ab,'')}
-        <div style="color:${tc};opacity:.65;">${QR_SVG}</div>
-        <span style="font-size:6px;opacity:.28;font-weight:700;letter-spacing:1px;color:${tc};text-align:center;">TAPID</span>
-      </div>
-      <div style="flex:1;">
-        <div style="font-family:${s.font};font-weight:800;font-size:${nm_sz};color:${tc};letter-spacing:-.4px;margin-bottom:2px;">${u.name}</div>
-        <div style="${roleStyle}">${u.role}</div>
-        <div style="${coStyle};margin-bottom:10px;">${u.co}</div>
-        <div style="display:flex;flex-dire
+}
+</script>
+</body>
+</html>
