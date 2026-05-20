@@ -2,47 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TapID — Smart Digital Identity Cards</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="MeeCards — India's smartest digital identity card platform. Create, share, and download your professional digital card instantly."/>
+<title>MeeCards — Smart Digital Identity Cards</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
 <style>
+/* ═══════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════ */
 :root{
-  --bg:#060608;--surface:#0f0f14;--surface2:#16161e;
-  --border:#1e1e2a;--border2:#2a2a3a;
-  --saffron:#FF6B00;--saffron2:#FF8C38;--gold:#D4A017;--teal:#00C9A7;
+  --bg:#060608;--surface:#0f0f14;--surface2:#16161e;--surface3:#1c1c26;
+  --border:#1e1e2a;--border2:#2a2a3a;--border3:#363648;
+  --saffron:#FF6B00;--saffron2:#FF8C38;--saffron-soft:rgba(255,107,0,0.12);
+  --gold:#D4A017;--teal:#00C9A7;--green:#22c55e;--red:#ef4444;
   --text:#f0eee8;--muted:#7a7a8c;--muted2:#4a4a5a;
+  --radius-sm:8px;--radius-md:14px;--radius-lg:20px;--radius-xl:28px;
+  --shadow-sm:0 4px 16px rgba(0,0,0,0.3);
+  --shadow-md:0 12px 40px rgba(0,0,0,0.5);
+  --shadow-lg:0 28px 80px rgba(0,0,0,0.7);
+  --transition:.22s cubic-bezier(.25,.8,.25,1);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-track{background:var(--bg);}
-::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:4px;}
+body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:4px;}
+img{display:block;max-width:100%;}
+button{cursor:pointer;font-family:'Instrument Sans',sans-serif;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(6,6,8,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;color:var(--text);text-decoration:none;}
+/* ═══════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(6,6,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-.5px;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:2px;}
 .logo em{color:var(--saffron);font-style:normal;}
 .nav-links{display:flex;gap:32px;list-style:none;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color var(--transition);}
 .nav-links a:hover{color:var(--text);}
-.nav-cta{background:var(--saffron);color:#fff;border:none;padding:9px 22px;border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all .2s;}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.nav-cta{background:var(--saffron);color:#fff;border:none;padding:9px 22px;border-radius:100px;font-size:13px;font-weight:600;transition:all var(--transition);}
 .nav-cta:hover{background:var(--saffron2);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:8px;}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--border);padding:20px 24px;flex-direction:column;gap:16px;z-index:499;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--muted);text-decoration:none;font-size:15px;font-weight:500;}
 
-/* HERO */
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 48px 80px;position:relative;overflow:hidden;text-align:center;}
-.hero-glow{position:absolute;top:10%;left:50%;transform:translateX(-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(255,107,0,0.12) 0%,transparent 65%);pointer-events:none;}
-.hero-glow2{position:absolute;bottom:-10%;left:20%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,201,167,0.07) 0%,transparent 65%);pointer-events:none;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,0,0.12);border:1px solid rgba(255,107,0,0.3);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--saffron);letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .6s ease both;}
-.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--saffron);animation:pulse 1.5s infinite;}
+.hero-glow{position:absolute;top:10%;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(255,107,0,.1) 0%,transparent 65%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:-10%;left:15%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,201,167,.06) 0%,transparent 65%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--saffron-soft);border:1px solid rgba(255,107,0,.3);border-radius:100px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--saffron);letter-spacing:1px;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .6s ease both;}
+.hero-badge .pulse{width:6px;height:6px;border-radius:50%;background:var(--saffron);animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.4);}}
 .hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(44px,7vw,88px);line-height:1.0;letter-spacing:-3px;margin-bottom:24px;animation:fadeUp .6s .1s ease both;}
 .hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--saffron),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-sub{font-size:18px;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:40px;animation:fadeUp .6s .2s ease both;}
 .hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .6s .3s ease both;}
-.btn-primary{background:var(--saffron);color:#fff;border:none;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all .25s;}
-.btn-primary:hover{background:var(--saffron2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,107,0,0.35);}
-.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border2);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:500;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all .25s;}
+.btn-primary{background:var(--saffron);color:#fff;border:none;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:600;transition:all var(--transition);}
+.btn-primary:hover{background:var(--saffron2);transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,107,0,.35);}
+.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border2);padding:14px 32px;border-radius:100px;font-size:15px;font-weight:500;transition:all var(--transition);}
 .btn-secondary:hover{border-color:var(--muted);transform:translateY(-2px);}
 .hero-stats{display:flex;gap:48px;margin-top:64px;animation:fadeUp .6s .4s ease both;}
 .hero-stat .num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;}
@@ -50,29 +70,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .hero-stat p{font-size:12px;color:var(--muted);margin-top:2px;letter-spacing:.5px;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 
-/* MARQUEE */
+/* ═══════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════ */
 .marquee-section{padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--surface);}
 .marquee-track{display:flex;gap:48px;white-space:nowrap;animation:marquee 22s linear infinite;align-items:center;}
 .marquee-track span{color:var(--muted2);font-size:13px;font-weight:500;letter-spacing:1px;text-transform:uppercase;}
-.mdot{width:4px;height:4px;border-radius:50%;background:var(--saffron);flex-shrink:0;display:inline-block;vertical-align:middle;margin:0 0;}
+.mdot{width:4px;height:4px;border-radius:50%;background:var(--saffron);display:inline-block;vertical-align:middle;}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-/* SECTIONS */
+/* ═══════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════ */
 section{padding:90px 48px;}
 .sec-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);margin-bottom:12px;}
 .sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,4vw,52px);letter-spacing:-1.5px;line-height:1.05;margin-bottom:16px;}
 .sec-sub{font-size:16px;color:var(--muted);max-width:500px;line-height:1.7;}
 
-/* CARD TYPES */
+/* ═══════════════════════════════════════
+   CARD TYPES
+═══════════════════════════════════════ */
 #types{background:var(--bg);}
 .types-header{text-align:center;margin-bottom:60px;}
 .types-header .sec-sub{margin:0 auto;}
 .types-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.type-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;position:relative;overflow:hidden;transition:all .3s;cursor:pointer;}
-.type-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,0.4);}
-.type-card.featured{border-color:rgba(255,107,0,0.4);background:rgba(255,107,0,0.04);}
+.type-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;position:relative;overflow:hidden;transition:all var(--transition);cursor:pointer;}
+.type-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--shadow-md);}
+.type-card.featured{border-color:rgba(255,107,0,.4);background:rgba(255,107,0,.04);}
+.type-card.active-plan{border-color:var(--saffron)!important;box-shadow:0 0 0 2px rgba(255,107,0,.25)!important;}
 .type-feat-badge{position:absolute;top:16px;right:16px;background:var(--saffron);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;}
-.type-preview{height:120px;border-radius:14px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.type-preview{height:120px;border-radius:var(--radius-md);margin-bottom:20px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
 .type-name{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;margin-bottom:6px;}
 .type-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px;}
 .type-price{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--saffron);}
@@ -80,85 +107,251 @@ section{padding:90px 48px;}
 .type-features{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px;}
 .type-features li{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px;}
 .type-features li::before{content:'✓';color:var(--teal);font-weight:700;}
+/* Plan feature highlight panel */
+.plan-feature-panel{margin-top:40px;background:var(--surface2);border:1px solid var(--saffron);border-radius:var(--radius-lg);padding:28px;display:none;animation:fadeUp .3s ease;}
+.plan-feature-panel.visible{display:block;}
+.pfp-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px;}
+.pfp-sub{font-size:13px;color:var(--muted);margin-bottom:20px;}
+.pfp-chips{display:flex;flex-wrap:wrap;gap:10px;}
+.pfp-chip{background:var(--surface3);border:1px solid var(--border3);border-radius:100px;padding:6px 16px;font-size:13px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px;}
+.pfp-chip.highlight{background:rgba(255,107,0,.12);border-color:rgba(255,107,0,.3);color:var(--saffron);}
 
-/* BUILDER */
+/* ═══════════════════════════════════════
+   CARD BUILDER
+═══════════════════════════════════════ */
 #builder{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.builder-inner{max-width:700px;margin:0 auto;text-align:center;}
-.builder-inner h2{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:800;letter-spacing:-1.5px;margin-bottom:10px;}
-.builder-inner .bsub{color:var(--muted);font-size:16px;margin-bottom:44px;}
+.builder-inner{max-width:740px;margin:0 auto;}
+.builder-inner h2{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:800;letter-spacing:-1.5px;margin-bottom:10px;text-align:center;}
+.builder-inner .bsub{color:var(--muted);font-size:16px;margin-bottom:44px;text-align:center;}
+/* Mini live preview */
+.mini-preview-wrap{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:20px;margin-bottom:28px;display:flex;align-items:center;gap:20px;}
+.mini-preview-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+#miniCard{width:220px;height:130px;border-radius:12px;padding:14px;position:relative;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#0a0a14,#12122a);transition:all .3s;}
+.mini-card-name{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#f0eee8;margin-bottom:2px;}
+.mini-card-role{font-size:10px;color:#FF6B00;margin-bottom:1px;}
+.mini-card-co{font-size:9px;opacity:.45;color:#f0eee8;margin-bottom:8px;font-style:italic;}
+.mini-card-contact{font-size:9px;color:#f0eee8;opacity:.7;margin-bottom:2px;}
+.mini-card-brand{position:absolute;bottom:10px;right:12px;font-size:7px;font-weight:700;letter-spacing:2px;opacity:.3;color:#f0eee8;}
+.mini-preview-info{flex:1;}
+.mini-preview-info p{font-size:13px;color:var(--muted);line-height:1.7;}
+.mini-preview-info strong{color:var(--text);}
+/* Form */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left;}
-.fg{margin-bottom:0;}
+.fg{margin-bottom:0;position:relative;}
 .fg.full{grid-column:1/-1;}
 .fg label{display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.fg input{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:13px 16px;color:var(--text);font-size:14px;font-family:'Instrument Sans',sans-serif;outline:none;transition:border .2s;}
-.fg input:focus{border-color:var(--saffron);}
+.fg input{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:13px 16px;color:var(--text);font-size:14px;font-family:'Instrument Sans',sans-serif;outline:none;transition:all var(--transition);}
+.fg input:focus{border-color:var(--saffron);background:var(--surface3);box-shadow:0 0 0 3px rgba(255,107,0,.1);}
+.fg input.error{border-color:var(--red)!important;background:rgba(239,68,68,.05)!important;}
+.fg input.valid{border-color:var(--green)!important;}
 .fg input::placeholder{color:var(--muted2);}
+.field-err{position:absolute;bottom:-18px;left:0;font-size:11px;color:var(--red);font-weight:500;display:none;}
+.fg.has-error .field-err{display:block;}
 .avatar-row{grid-column:1/-1;display:flex;align-items:center;gap:16px;}
-.av-circle{width:68px;height:68px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:26px;overflow:hidden;flex-shrink:0;cursor:pointer;border:2px dashed var(--border2);transition:border .2s;}
-.av-circle:hover{border-color:var(--saffron);}
+.av-circle{width:68px;height:68px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:26px;overflow:hidden;flex-shrink:0;cursor:pointer;border:2px dashed var(--border2);transition:all var(--transition);}
+.av-circle:hover{border-color:var(--saffron);transform:scale(1.05);}
 .av-circle img{width:100%;height:100%;object-fit:cover;display:none;}
 .upload-hint{font-size:13px;color:var(--muted);line-height:1.6;text-align:left;}
 .see-btn{
   margin-top:36px;width:100%;
   background:linear-gradient(135deg,var(--saffron),var(--gold));
-  color:#fff;border:none;padding:18px 32px;border-radius:16px;
-  font-size:17px;font-weight:700;cursor:pointer;
-  font-family:'Syne',sans-serif;letter-spacing:-.3px;
+  color:#fff;border:none;padding:18px 32px;border-radius:var(--radius-md);
+  font-size:17px;font-weight:700;letter-spacing:-.3px;
   transition:all .3s;display:flex;align-items:center;justify-content:center;gap:10px;
+  position:relative;overflow:hidden;
 }
-.see-btn:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(255,107,0,0.4);}
+.see-btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background .2s;}
+.see-btn:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(255,107,0,.4);}
+.see-btn:hover::after{background:rgba(255,255,255,.06);}
+.see-btn:disabled{opacity:.5;transform:none!important;box-shadow:none!important;cursor:default;}
 .bnote{margin-top:14px;font-size:13px;color:var(--muted2);text-align:center;}
+/* Builder glow animation */
+@keyframes builderPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,0,0);}50%{box-shadow:0 0 0 8px rgba(255,107,0,.15);}}
+#builder.highlight-builder{animation:builderPulse .8s ease 2;}
 
-/* GALLERY OVERLAY */
+/* ═══════════════════════════════════════
+   GALLERY OVERLAY
+═══════════════════════════════════════ */
 #galleryOverlay{position:fixed;inset:0;z-index:2000;background:#050507;display:none;flex-direction:column;overflow:hidden;}
 #galleryOverlay.open{display:flex;}
-.gnav{display:flex;align-items:center;justify-content:space-between;padding:16px 32px;border-bottom:1px solid var(--border);flex-shrink:0;background:rgba(5,5,7,0.97);backdrop-filter:blur(16px);}
-.gnav-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;}
+/* Gallery nav */
+.gnav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;border-bottom:1px solid var(--border);flex-shrink:0;background:rgba(5,5,7,.97);backdrop-filter:blur(16px);gap:16px;flex-wrap:wrap;}
+.gnav-left{display:flex;align-items:center;gap:16px;}
+.gnav-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;}
 .gnav-title em{color:var(--saffron);font-style:normal;}
-.gnav-right{display:flex;align-items:center;gap:14px;}
-.gcnt{font-size:13px;color:var(--muted);background:var(--surface2);border:1px solid var(--border2);border-radius:100px;padding:4px 14px;}
-.gclose{background:var(--surface2);border:1px solid var(--border2);color:var(--muted);width:38px;height:38px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.gcnt{font-size:12px;color:var(--muted);background:var(--surface2);border:1px solid var(--border2);border-radius:100px;padding:4px 12px;}
+/* Search + Filter bar */
+.gallery-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.g-search{background:var(--surface2);border:1px solid var(--border2);border-radius:100px;padding:8px 16px;color:var(--text);font-size:13px;font-family:'Instrument Sans',sans-serif;outline:none;width:180px;transition:all var(--transition);}
+.g-search:focus{border-color:var(--saffron);width:220px;}
+.g-search::placeholder{color:var(--muted2);}
+.g-filter{display:flex;gap:6px;}
+.g-filter-btn{background:var(--surface2);border:1px solid var(--border2);border-radius:100px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--muted);transition:all var(--transition);}
+.g-filter-btn:hover{border-color:var(--muted);color:var(--text);}
+.g-filter-btn.active{background:var(--saffron);border-color:var(--saffron);color:#fff;}
+.gnav-right{display:flex;align-items:center;gap:10px;}
+.gclose{background:var(--surface2);border:1px solid var(--border2);color:var(--muted);width:36px;height:36px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all var(--transition);}
 .gclose:hover{background:var(--border2);color:var(--text);}
-.gscroll{flex:1;overflow-y:auto;padding:28px 32px;}
+/* Gallery scroll */
+.gscroll{flex:1;overflow-y:auto;padding:24px 28px;}
 .gscroll::-webkit-scrollbar{width:4px;}
 .gscroll::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:4px;}
-.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;}
-
-/* GENERATED CARD */
-.gcard{border-radius:18px;padding:20px;position:relative;overflow:hidden;cursor:pointer;transition:transform .22s,box-shadow .22s,outline .15s;min-height:165px;}
-.gcard:hover{transform:translateY(-5px) scale(1.013);box-shadow:0 28px 65px rgba(0,0,0,0.65);}
-.gcard.chosen{outline:3px solid var(--saffron);outline-offset:3px;}
-.chosen-badge{position:absolute;top:10px;left:10px;background:var(--saffron);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;z-index:10;display:none;}
-.gcard.chosen .chosen-badge{display:block;}
-
-/* GALLERY FOOTER */
-.gfooter{padding:14px 32px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:rgba(5,5,7,0.97);}
-.gsel-info{font-size:14px;color:var(--muted);}
+/* Trending section header */
+.gallery-section-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;margin-top:8px;}
+.gallery-section-header h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.trending-badge{background:linear-gradient(135deg,#FF6B00,#ff4500);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;letter-spacing:.5px;}
+/* Gallery grid */
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px;}
+/* Template card */
+.tpl-card{border-radius:var(--radius-md);position:relative;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition),outline var(--transition);overflow:hidden;group:true;}
+.tpl-card:hover{transform:translateY(-5px) scale(1.012);box-shadow:0 28px 65px rgba(0,0,0,.65);}
+.tpl-card.chosen{outline:3px solid var(--saffron);outline-offset:3px;}
+/* Template overlay on hover */
+.tpl-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background var(--transition);display:flex;align-items:center;justify-content:center;gap:8px;opacity:0;z-index:5;flex-direction:column;}
+.tpl-card:hover .tpl-overlay{background:rgba(0,0,0,.55);opacity:1;}
+.tpl-overlay-btn{padding:8px 18px;border-radius:100px;font-size:12px;font-weight:700;border:none;transition:all var(--transition);font-family:'Instrument Sans',sans-serif;}
+.tpl-overlay-select{background:var(--saffron);color:#fff;}
+.tpl-overlay-select:hover{background:var(--saffron2);}
+.tpl-overlay-fav{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);}
+.tpl-overlay-fav.faved{background:rgba(239,68,68,.8);border-color:transparent;}
+/* Top badges on card */
+.tpl-badges{position:absolute;top:10px;left:10px;display:flex;gap:6px;z-index:4;}
+.badge-free{background:var(--green);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.badge-premium{background:linear-gradient(135deg,#D4A017,#FF6B00);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.badge-trending{background:rgba(255,107,0,.9);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.badge-new{background:rgba(0,201,167,.9);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.chosen-badge{position:absolute;top:10px;right:10px;background:var(--saffron);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;z-index:10;display:none;}
+.tpl-card.chosen .chosen-badge{display:block;}
+/* Fav heart */
+.fav-btn{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;z-index:6;transition:all var(--transition);}
+.fav-btn.faved{background:rgba(239,68,68,.8);border-color:transparent;}
+/* Card info bar below rendered card */
+.tpl-info{padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius-md) var(--radius-md);}
+.tpl-name{font-size:13px;font-weight:600;color:var(--text);}
+.tpl-meta{font-size:11px;color:var(--muted);margin-top:2px;}
+/* Skeleton loader */
+.skeleton{background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius-md);height:175px;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+/* Empty state */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty-state .icon{font-size:48px;margin-bottom:16px;}
+.empty-state p{font-size:15px;}
+/* Favourites section */
+.fav-strip{margin-bottom:28px;display:none;}
+.fav-strip.visible{display:block;}
+/* Gallery footer */
+.gfooter{padding:12px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:rgba(5,5,7,.97);gap:12px;flex-wrap:wrap;}
+.gsel-info{font-size:13px;color:var(--muted);}
 .gsel-info em{color:var(--saffron);font-style:normal;font-weight:600;}
-.gproceed{background:linear-gradient(135deg,var(--saffron),var(--gold));color:#fff;border:none;padding:12px 28px;border-radius:100px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;transition:all .25s;display:flex;align-items:center;gap:8px;}
-.gproceed:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(255,107,0,0.4);}
+.gfooter-btns{display:flex;gap:10px;align-items:center;}
+.gedit-btn{display:flex;align-items:center;gap:7px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);padding:10px 18px;border-radius:100px;font-size:13px;font-weight:600;transition:all var(--transition);}
+.gedit-btn:hover{border-color:var(--saffron);color:var(--saffron);}
+.gedit-btn:disabled{opacity:.35;cursor:default;}
+.gproceed{background:linear-gradient(135deg,var(--saffron),var(--gold));color:#fff;border:none;padding:11px 24px;border-radius:100px;font-size:13px;font-weight:700;transition:all var(--transition);display:flex;align-items:center;gap:7px;}
+.gproceed:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(255,107,0,.4);}
 .gproceed:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none;}
 
-/* FEATURES */
+/* ═══════════════════════════════════════
+   THE RENDERED CARD (gcard)
+═══════════════════════════════════════ */
+.gcard{padding:20px;position:relative;overflow:hidden;min-height:165px;border-radius:var(--radius-md) var(--radius-md) 0 0;}
+
+/* ═══════════════════════════════════════
+   CARD EDITOR PANEL
+═══════════════════════════════════════ */
+#editorOverlay{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:flex-end;}
+#editorPanel{width:400px;max-width:94vw;height:100vh;background:var(--surface);border-left:1px solid var(--border2);display:flex;flex-direction:column;animation:slideInRight .3s cubic-bezier(.25,.8,.25,1);}
+@keyframes slideInRight{from{transform:translateX(100%);}to{transform:translateX(0);}}
+.ep-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.ep-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;display:flex;align-items:center;gap:8px;}
+.ep-close{background:var(--surface2);border:1px solid var(--border2);color:var(--muted);width:32px;height:32px;border-radius:50%;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all var(--transition);}
+.ep-close:hover{background:var(--border2);color:var(--text);}
+.ep-preview-wrap{background:var(--bg);padding:16px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.ep-preview-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+#epCardWrap .gcard{transform:scale(.82);transform-origin:top left;margin-bottom:-30px;pointer-events:none;border-radius:var(--radius-md)!important;}
+.ep-scroll{flex:1;overflow-y:auto;padding:16px 20px 24px;}
+.ep-scroll::-webkit-scrollbar{width:3px;}
+.ep-scroll::-webkit-scrollbar-thumb{background:var(--saffron);border-radius:3px;}
+.ep-section{margin-bottom:20px;}
+.ep-section-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.ep-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;}
+.ep-label{font-size:12px;color:var(--muted);font-weight:500;min-width:88px;flex-shrink:0;}
+.ep-color-input{width:36px;height:36px;border-radius:8px;border:2px solid var(--border2);cursor:pointer;padding:0;background:none;outline:none;}
+.ep-color-val{font-size:11px;color:var(--muted);font-family:monospace;}
+.ep-range{flex:1;min-width:80px;accent-color:var(--saffron);cursor:pointer;height:4px;border-radius:4px;}
+.ep-range-val{font-size:11px;color:var(--muted);min-width:34px;text-align:right;}
+.ep-select{flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;color:var(--text);font-size:12px;font-family:'Instrument Sans',sans-serif;outline:none;cursor:pointer;transition:border var(--transition);}
+.ep-select:focus{border-color:var(--saffron);}
+.ep-toggle-row{display:flex;gap:6px;}
+.ep-toggle{padding:6px 14px;border-radius:100px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:12px;font-weight:500;transition:all var(--transition);font-family:'Instrument Sans',sans-serif;}
+.ep-toggle.active{background:var(--saffron);color:#fff;border-color:var(--saffron);}
+.ep-swatch-row{display:flex;gap:7px;flex-wrap:wrap;}
+.ep-swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .18s;flex-shrink:0;}
+.ep-swatch:hover{transform:scale(1.2);border-color:rgba(255,255,255,.4);}
+.ep-swatch.active{border-color:#fff;transform:scale(1.15);}
+.ep-apply-btn{width:100%;background:linear-gradient(135deg,var(--saffron),var(--gold));color:#fff;border:none;padding:14px;border-radius:12px;font-size:15px;font-weight:700;transition:all var(--transition);display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;font-family:'Syne',sans-serif;}
+.ep-apply-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(255,107,0,.4);}
+
+/* ═══════════════════════════════════════
+   PAYMENT MODAL
+═══════════════════════════════════════ */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);z-index:3000;display:none;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-xl);padding:28px 24px;max-width:460px;width:100%;position:relative;animation:modalIn .3s ease;max-height:92vh;overflow-y:auto;}
+@keyframes modalIn{from{opacity:0;transform:scale(.95);}to{opacity:1;transform:scale(1);}}
+.modal-close{position:absolute;top:14px;right:14px;background:var(--border2);border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all var(--transition);z-index:1;}
+.modal-close:hover{background:var(--border);color:var(--text);}
+.modal h3{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:6px;padding-right:36px;}
+.modal-sub{color:var(--muted);font-size:13px;margin-bottom:22px;line-height:1.6;}
+.plan-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.plan-card{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-md);padding:14px 16px;cursor:pointer;transition:all var(--transition);display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;}
+.plan-card:hover,.plan-card.selected{border-color:var(--saffron);background:rgba(255,107,0,.06);}
+.plan-card.selected .plan-radio{background:var(--saffron);border-color:var(--saffron);}
+.plan-left{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.plan-name{font-weight:600;font-size:14px;white-space:nowrap;}
+.plan-desc{font-size:11px;color:var(--muted);line-height:1.4;}
+.plan-price{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--saffron);white-space:nowrap;text-align:right;}
+.plan-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);transition:all var(--transition);flex-shrink:0;}
+.popular-badge{display:inline-block;background:var(--saffron);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;letter-spacing:.5px;margin-top:3px;width:fit-content;}
+.pay-btn{width:100%;background:linear-gradient(135deg,var(--saffron),var(--gold));color:#fff;border:none;padding:15px;border-radius:var(--radius-md);font-size:15px;font-weight:600;transition:all var(--transition);}
+.pay-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,107,0,.35);}
+.pay-btn:disabled{opacity:.6;cursor:default;transform:none;}
+.pay-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:11px;color:var(--muted2);}
+#downloadProgress{display:none;margin-top:14px;text-align:center;}
+#downloadProgress p{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.prog-bar{height:4px;background:var(--border2);border-radius:100px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--saffron),var(--gold));border-radius:100px;width:0%;transition:width .4s ease;}
+/* Premium unlock modal */
+#premiumModal .modal{max-width:400px;}
+.premium-icon{font-size:48px;text-align:center;margin-bottom:16px;}
+.premium-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.premium-features li{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.premium-features li::before{content:'⚡';font-size:12px;}
+
+/* ═══════════════════════════════════════
+   FEATURES SECTION
+═══════════════════════════════════════ */
 #features{background:var(--surface);}
 .features-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
 .feature-list-big{display:flex;flex-direction:column;gap:20px;margin-top:36px;}
-.feature-item{display:flex;gap:16px;padding:20px;background:var(--surface2);border:1px solid var(--border);border-radius:16px;transition:all .2s;}
+.feature-item{display:flex;gap:16px;padding:20px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-md);transition:all var(--transition);}
 .feature-item:hover{border-color:var(--border2);transform:translateX(4px);}
 .feature-icon{width:44px;height:44px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;}
 .feature-item h4{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px;}
 .feature-item p{font-size:13px;color:var(--muted);line-height:1.6;}
 .features-right{display:flex;flex-direction:column;gap:16px;}
-.feat-stat{background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:24px;}
+.feat-stat{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;}
 .feat-stat .big{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;color:var(--saffron);line-height:1;}
 .feat-stat p{color:var(--muted);font-size:14px;margin-top:4px;}
 
-/* REVIEWS */
+/* ═══════════════════════════════════════
+   REVIEWS
+═══════════════════════════════════════ */
 #reviews{background:var(--bg);}
 .reviews-header{text-align:center;margin-bottom:56px;}
 .reviews-header .sec-sub{margin:0 auto;}
 .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.review-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;transition:all .2s;}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;transition:all var(--transition);}
 .review-card:hover{border-color:var(--border2);transform:translateY(-3px);}
 .review-stars{display:flex;gap:3px;margin-bottom:14px;}
 .review-stars span{color:var(--gold);font-size:14px;}
@@ -168,72 +361,52 @@ section{padding:90px 48px;}
 .reviewer-name{font-size:14px;font-weight:600;}
 .reviewer-role{font-size:12px;color:var(--muted);}
 
-/* FAQ */
+/* ═══════════════════════════════════════
+   FAQ
+═══════════════════════════════════════ */
 #faq{background:var(--surface);border-top:1px solid var(--border);}
 .faq-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start;}
 .faq-list{display:flex;flex-direction:column;gap:12px;}
-.faq-item{background:var(--surface2);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border .2s;}
-.faq-item.open{border-color:rgba(255,107,0,0.3);}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;cursor:pointer;font-weight:600;font-size:15px;transition:color .2s;gap:12px;}
+.faq-item{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;transition:border var(--transition);}
+.faq-item.open{border-color:rgba(255,107,0,.3);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;cursor:pointer;font-weight:600;font-size:15px;transition:color var(--transition);gap:12px;}
 .faq-q:hover{color:var(--saffron);}
 .faq-icon{width:24px;height:24px;border-radius:50%;background:var(--border2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:all .3s;}
 .faq-item.open .faq-icon{background:var(--saffron);transform:rotate(45deg);}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease;font-size:14px;color:var(--muted);line-height:1.8;padding:0 20px;}
 .faq-item.open .faq-a{max-height:200px;padding:0 20px 18px;}
 
-/* FOOTER */
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:64px 48px 32px;}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
 .footer-brand .logo{display:block;margin-bottom:12px;font-size:24px;}
 .footer-brand p{color:var(--muted);font-size:14px;line-height:1.7;max-width:280px;}
 .footer-col h5{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:16px;}
 .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.footer-col ul li a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s;}
+.footer-col ul li a{color:var(--muted);text-decoration:none;font-size:14px;transition:color var(--transition);}
 .footer-col ul li a:hover{color:var(--text);}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border);font-size:13px;color:var(--muted2);}
 .footer-socials{display:flex;gap:12px;}
-.social-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--muted);text-decoration:none;transition:all .2s;}
+.social-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--muted);text-decoration:none;transition:all var(--transition);}
 .social-btn:hover{border-color:var(--saffron);color:var(--saffron);}
 
-/* PAYMENT MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:3000;display:none;align-items:center;justify-content:center;padding:16px;}
-.modal-overlay.open{display:flex;}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:28px 24px;max-width:460px;width:100%;position:relative;animation:modalIn .3s ease;max-height:90vh;overflow-y:auto;}
-@keyframes modalIn{from{opacity:0;transform:scale(.95);}to{opacity:1;transform:scale(1);}}
-.modal-close{position:absolute;top:14px;right:14px;background:var(--border2);border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:1;}
-.modal-close:hover{background:var(--border);color:var(--text);}
-.modal h3{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-1px;margin-bottom:6px;padding-right:36px;}
-.modal-sub{color:var(--muted);font-size:13px;margin-bottom:22px;line-height:1.6;}
-.plan-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
-/* FIXED: proper plan card layout — no wrapping */
-.plan-card{
-  background:var(--surface2);border:1px solid var(--border2);
-  border-radius:14px;padding:14px 16px;cursor:pointer;transition:all .2s;
-  display:grid;
-  grid-template-columns:1fr auto auto;
-  align-items:center;
-  gap:12px;
-}
-.plan-card:hover,.plan-card.selected{border-color:var(--saffron);background:rgba(255,107,0,0.06);}
-.plan-card.selected .plan-radio{background:var(--saffron);border-color:var(--saffron);}
-.plan-left{display:flex;flex-direction:column;gap:3px;min-width:0;}
-.plan-name{font-weight:600;font-size:14px;white-space:nowrap;}
-.plan-desc{font-size:11px;color:var(--muted);line-height:1.4;}
-.plan-price{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--saffron);white-space:nowrap;text-align:right;}
-.plan-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);transition:all .2s;flex-shrink:0;}
-.popular-badge{display:inline-block;background:var(--saffron);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;letter-spacing:.5px;margin-top:3px;width:fit-content;}
-.pay-btn{width:100%;background:linear-gradient(135deg,var(--saffron),var(--gold));color:#fff;border:none;padding:15px;border-radius:14px;font-size:15px;font-weight:600;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all .25s;}
-.pay-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,107,0,0.35);}
-.pay-btn:disabled{opacity:.6;cursor:default;transform:none;}
-.pay-secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font-size:11px;color:var(--muted2);}
-/* download progress */
-#downloadProgress{display:none;margin-top:14px;text-align:center;}
-#downloadProgress p{font-size:13px;color:var(--muted);margin-bottom:8px;}
-.prog-bar{height:4px;background:var(--border2);border-radius:100px;overflow:hidden;}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--saffron),var(--gold));border-radius:100px;width:0%;transition:width .4s ease;}
+/* ═══════════════════════════════════════
+   TOAST NOTIFICATION
+═══════════════════════════════════════ */
+#toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface);border:1px solid var(--border2);border-radius:100px;padding:10px 20px;font-size:13px;font-weight:600;color:var(--text);z-index:9999;transition:transform .3s ease;display:flex;align-items:center;gap:8px;white-space:nowrap;box-shadow:var(--shadow-md);}
+#toast.show{transform:translateX(-50%) translateY(0);}
+#toast.success{border-color:var(--green);color:var(--green);}
+#toast.error{border-color:var(--red);color:var(--red);}
 
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
 @media(max-width:900px){
-  nav{padding:0 20px;}.nav-links{display:none;}
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
   section{padding:60px 20px;}
   .hero{padding:100px 20px 60px;}
   .types-grid{grid-template-columns:1fr;}
@@ -245,37 +418,62 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:64px 48px
   .footer-bottom{flex-direction:column;gap:16px;text-align:center;}
   .hero-stats{gap:24px;}
   .ggrid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
-  .gscroll{padding:20px;}
+  .gscroll{padding:16px 20px;}
+  #editorPanel{width:100%;max-width:100%;border-radius:20px 20px 0 0;max-height:88vh;}
+  #editorOverlay{align-items:flex-end;}
+  .gnav{padding:12px 16px;}
+  .gfooter{padding:10px 16px;}
+  .gallery-controls{order:3;width:100%;}
+  .g-search{width:100%;}
+  .mini-preview-wrap{flex-direction:column;text-align:center;}
+  #miniCard{width:100%;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════ -->
 <nav>
-  <a href="#" class="logo">TAP<em>ID</em></a>
+  <a href="#" class="logo">Mee<em>Cards</em></a>
   <ul class="nav-links">
     <li><a href="#types">Card Types</a></li>
-    <li><a href="#builder">Create Card</a></li>
+    <li><a href="#builder">Build Card</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('builder').scrollIntoView({behavior:'smooth'})">Create Your Card →</button>
+  <div class="nav-right">
+    <button class="nav-cta" onclick="focusBuilder()">Build My Card →</button>
+    <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#types" onclick="closeMobileMenu()">Card Types</a>
+  <a href="#builder" onclick="closeMobileMenu();focusBuilder()">Build Card</a>
+  <a href="#features" onclick="closeMobileMenu()">Features</a>
+  <a href="#reviews" onclick="closeMobileMenu()">Reviews</a>
+  <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+</div>
 
-<!-- HERO -->
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-glow"></div><div class="hero-glow2"></div>
-  <div class="hero-badge"><span></span> India's Smartest Digital Identity</div>
-  <h1>Your Identity.<br><em>One Tap Away.</em></h1>
-  <p class="hero-sub">No more paper cards. No more broken links. TapID gives you a living, shareable profile — built for India's professionals, students, and entrepreneurs.</p>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-badge"><span class="pulse"></span> India's #1 Digital Identity Platform</div>
+  <h1>Your Identity.<br><em>Instantly Shared.</em></h1>
+  <p class="hero-sub">MeeCards transforms how you connect. Create a stunning digital card, share it with one tap, and never hand out a paper card again.</p>
   <div class="hero-btns">
-    <button class="btn-primary" onclick="document.getElementById('builder').scrollIntoView({behavior:'smooth'})">Create Your Card Free →</button>
-    <button class="btn-secondary" onclick="document.getElementById('types').scrollIntoView({behavior:'smooth'})">See Card Types</button>
+    <button class="btn-primary" onclick="focusBuilder()">Build Your Card Free →</button>
+    <button class="btn-secondary" onclick="document.getElementById('types').scrollIntoView({behavior:'smooth'})">Explore Card Types</button>
   </div>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="num"><em>10K+</em></div><p>Cards Created</p></div>
+    <div class="hero-stat"><div class="num"><em>12K+</em></div><p>Cards Created</p></div>
     <div class="hero-stat"><div class="num"><em>₹299</em></div><p>NFC Card Price</p></div>
     <div class="hero-stat"><div class="num"><em>4.9★</em></div><p>User Rating</p></div>
   </div>
@@ -284,136 +482,212 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:64px 48px
 <!-- MARQUEE -->
 <div class="marquee-section">
   <div class="marquee-track">
-    <span>QR + NFC Cards</span>&nbsp;<span class="mdot"></span>&nbsp;<span>WhatsApp Connect</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Lead Capture</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Document Vault</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Live Analytics</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Instant Share</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Business Dashboard</span>&nbsp;<span class="mdot"></span>&nbsp;<span>No Paper Waste</span>&nbsp;<span class="mdot"></span>&nbsp;<span>QR + NFC Cards</span>&nbsp;<span class="mdot"></span>&nbsp;<span>WhatsApp Connect</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Lead Capture</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Document Vault</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Live Analytics</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Instant Share</span>&nbsp;<span class="mdot"></span>&nbsp;<span>Business Dashboard</span>&nbsp;<span class="mdot"></span>&nbsp;<span>No Paper Waste</span>&nbsp;<span class="mdot"></span>
+    <span>QR + NFC Cards</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>WhatsApp Connect</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Lead Capture</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Document Vault</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Live Analytics</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Instant Share</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Business Dashboard</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>No Paper Waste</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>QR + NFC Cards</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>WhatsApp Connect</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Lead Capture</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Document Vault</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Live Analytics</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Instant Share</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>Business Dashboard</span>&nbsp;<span class="mdot"></span>&nbsp;
+    <span>No Paper Waste</span>&nbsp;<span class="mdot"></span>&nbsp;
   </div>
 </div>
 
-<!-- ─── CARD TYPES ─── -->
+<!-- ═══════════════════════════════════════
+     CARD TYPES
+═══════════════════════════════════════ -->
 <section id="types">
   <div class="types-header">
     <div class="sec-label">Card Types</div>
     <h2 class="sec-title">Pick Your Identity</h2>
-    <p class="sec-sub">From digital profiles to premium NFC cards — every professional need, covered.</p>
+    <p class="sec-sub">From free digital profiles to premium NFC cards — every professional need, covered.</p>
   </div>
   <div class="types-grid">
-    <div class="type-card">
+    <div class="type-card" onclick="selectPlanType('free')" data-plan="free">
       <div class="type-preview" style="background:linear-gradient(135deg,#1a1a28,#0f0f1a);">
-        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#f0eee8;">TAP<span style="color:#FF6B00;">ID</span></div><div style="font-size:10px;color:#888;margin-top:4px;">DIGITAL QR CARD</div></div>
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#f0eee8;">Mee<span style="color:#FF6B00;">Cards</span></div><div style="font-size:10px;color:#888;margin-top:4px;">DIGITAL QR CARD</div></div>
       </div>
       <div class="type-name">Digital QR Card</div>
-      <div class="type-desc">Shareable profile link with QR code. Send via WhatsApp, SMS, or email. Works on any device, no app needed.</div>
+      <div class="type-desc">Shareable profile link with QR code. Works on any device — no app install needed.</div>
       <div class="type-price">Free <span>forever</span></div>
       <ul class="type-features"><li>Dynamic profile link</li><li>QR code generated instantly</li><li>WhatsApp connect button</li><li>Basic lead capture</li></ul>
     </div>
-    <div class="type-card featured">
+    <div class="type-card featured" onclick="selectPlanType('pro')" data-plan="pro">
       <div class="type-feat-badge">Most Popular</div>
       <div class="type-preview" style="background:linear-gradient(135deg,#FF6B00,#D4500A);">
-        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;">TAP<span style="color:#fff0d0;">ID</span></div><div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:4px;">PRO DIGITAL</div><div style="margin-top:8px;font-size:24px;">⚡</div></div>
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;">Mee<span style="color:#fff0d0;">Cards</span></div><div style="font-size:10px;color:rgba(255,255,255,.7);margin-top:4px;">PRO DIGITAL</div><div style="margin-top:8px;font-size:24px;">⚡</div></div>
       </div>
       <div class="type-name">Pro Digital Card</div>
-      <div class="type-desc">Full-featured identity profile. Unlimited documents, lead CRM, custom link, analytics dashboard, and portfolio.</div>
+      <div class="type-desc">Full-featured identity profile. Unlimited documents, lead CRM, analytics, custom URL.</div>
       <div class="type-price">₹99 <span>/ month</span></div>
       <ul class="type-features"><li>Unlimited document vault</li><li>Lead capture + CRM</li><li>Custom profile URL</li><li>Full analytics dashboard</li><li>Portfolio showcase</li></ul>
     </div>
-    <div class="type-card">
+    <div class="type-card" onclick="selectPlanType('nfc')" data-plan="nfc">
       <div class="type-preview" style="background:linear-gradient(135deg,#0f0f0a,#1a1200);border:1px solid rgba(212,160,23,.2);">
-        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#D4A017;">TAP<span style="color:#ff9800;">ID</span></div><div style="font-size:10px;color:#888;margin-top:4px;">NFC ELITE CARD</div><div style="margin-top:6px;font-size:10px;color:rgba(212,160,23,.7);border:1px solid rgba(212,160,23,.3);border-radius:4px;padding:2px 8px;display:inline-block;">NFC ENABLED</div></div>
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#D4A017;">Mee<span style="color:#ff9800;">Cards</span></div><div style="font-size:10px;color:#888;margin-top:4px;">NFC ELITE</div><div style="margin-top:6px;font-size:10px;color:rgba(212,160,23,.7);border:1px solid rgba(212,160,23,.3);border-radius:4px;padding:2px 8px;display:inline-block;">NFC ENABLED</div></div>
       </div>
       <div class="type-name">NFC Elite Card</div>
-      <div class="type-desc">Premium physical card with embedded NFC chip. Tap on any smartphone — your profile opens instantly.</div>
+      <div class="type-desc">Premium physical NFC card. Just tap on any smartphone — profile opens instantly.</div>
       <div class="type-price">₹299 <span>one-time + ₹99/mo</span></div>
-      <ul class="type-features"><li>Physical matte black NFC card</li><li>Tap-to-open on any phone</li><li>Delivered in 5–7 days</li><li>Replace info anytime, same card</li></ul>
+      <ul class="type-features"><li>Physical matte black NFC card</li><li>Tap-to-open on any phone</li><li>Delivered in 5–7 days</li><li>All Pro features included</li></ul>
     </div>
-    <div class="type-card">
+    <div class="type-card" onclick="selectPlanType('business')" data-plan="business">
       <div class="type-preview" style="background:linear-gradient(135deg,#004D40,#00796B);">
-        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;">TAP<span style="color:#a7ffeb;">ID</span></div><div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:4px;">BUSINESS TEAM</div><div style="margin-top:8px;display:flex;gap:4px;justify-content:center;"><div style="width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.3);"></div><div style="width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.3);"></div><div style="width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.3);"></div></div></div>
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff;">Mee<span style="color:#a7ffeb;">Cards</span></div><div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:4px;">BUSINESS TEAM</div></div>
       </div>
       <div class="type-name">Business Team</div>
-      <div class="type-desc">Unified cards for your entire team. Central lead CRM, branded profiles, daily tap reports.</div>
+      <div class="type-desc">Unified cards for your entire team with a central lead CRM and analytics dashboard.</div>
       <div class="type-price">₹499 <span>/ month (10 members)</span></div>
       <ul class="type-features"><li>10 team member profiles</li><li>Branded company identity</li><li>Central lead dashboard</li><li>WhatsApp auto-follow-up</li></ul>
     </div>
-    <div class="type-card">
+    <div class="type-card" onclick="selectPlanType('student')" data-plan="student">
       <div class="type-preview" style="background:linear-gradient(135deg,#0D0D1A,#1a0a2e);">
-        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#e0d4ff;">TAP<span style="color:#b39ddb;">ID</span></div><div style="font-size:10px;color:#9e86ff;margin-top:4px;">STUDENT CARD</div><div style="margin-top:8px;font-size:20px;">🎓</div></div>
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#e0d4ff;">Mee<span style="color:#b39ddb;">Cards</span></div><div style="font-size:10px;color:#9e86ff;margin-top:4px;">STUDENT</div><div style="font-size:20px;margin-top:4px;">🎓</div></div>
       </div>
       <div class="type-name">Student Card</div>
-      <div class="type-desc">A living resume for students. Showcase marksheets, certifications, GitHub, and projects — all in one tap.</div>
+      <div class="type-desc">A living resume. Showcase marksheets, certifications, GitHub, and projects in one tap.</div>
       <div class="type-price">Free <span>with .edu email</span></div>
-      <ul class="type-features"><li>Resume builder profile</li><li>Certificate & marks upload</li><li>GitHub & LinkedIn links</li><li>QR on printed resume</li></ul>
+      <ul class="type-features"><li>Resume builder profile</li><li>Certificate upload</li><li>GitHub & LinkedIn links</li><li>QR on printed resume</li></ul>
     </div>
-    <div class="type-card">
+    <div class="type-card" onclick="selectPlanType('freelancer')" data-plan="freelancer">
       <div class="type-preview" style="background:linear-gradient(135deg,#1a0810,#3d0d24);">
-        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#ffb3c8;">TAP<span style="color:#ff6b9d;">ID</span></div><div style="font-size:10px;color:rgba(255,179,200,.6);margin-top:4px;">FREELANCER PRO</div><div style="margin-top:8px;font-size:20px;">💼</div></div>
+        <div style="text-align:center;"><div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#ffb3c8;">Mee<span style="color:#ff6b9d;">Cards</span></div><div style="font-size:10px;color:rgba(255,179,200,.6);margin-top:4px;">FREELANCER PRO</div><div style="font-size:20px;margin-top:4px;">💼</div></div>
       </div>
       <div class="type-name">Freelancer Pro</div>
-      <div class="type-desc">Portfolio + contact + pricing — all in one link. Share with clients, capture inquiries, showcase your best work.</div>
+      <div class="type-desc">Portfolio + contact + pricing all in one link. Capture inquiries and showcase your best work.</div>
       <div class="type-price">₹99 <span>/ month</span></div>
       <ul class="type-features"><li>Portfolio image gallery</li><li>Pricing PDF attachment</li><li>Client inquiry form</li><li>WhatsApp booking link</li></ul>
     </div>
   </div>
+  <!-- Dynamic plan feature panel -->
+  <div class="plan-feature-panel" id="planFeaturePanel">
+    <div class="pfp-title" id="pfpTitle">Pro Digital Card — Features Included</div>
+    <div class="pfp-sub" id="pfpSub">Everything you get with this plan:</div>
+    <div class="pfp-chips" id="pfpChips"></div>
+  </div>
 </section>
 
-<!-- ─── CARD BUILDER ─── -->
+<!-- ═══════════════════════════════════════
+     CARD BUILDER
+═══════════════════════════════════════ -->
 <section id="builder">
   <div class="builder-inner">
     <div class="sec-label" style="text-align:center;">Card Builder</div>
-    <h2>Design Your TapID Card</h2>
-    <p class="bsub">Fill in your details and click "See My Cards" to instantly browse <strong style="color:var(--text);">240 unique designs</strong> — every single one with your info baked in.</p>
+    <h2>Build Your MeeCard</h2>
+    <p class="bsub">Fill in your details and preview your card live. Then browse <strong style="color:var(--text);">30 trending designs</strong> with your info applied to every one.</p>
+
+    <!-- Mini live preview -->
+    <div class="mini-preview-wrap">
+      <div>
+        <div class="mini-preview-label">Live Preview</div>
+        <div id="miniCard">
+          <div class="mini-card-name">Your Name</div>
+          <div class="mini-card-role">Designation</div>
+          <div class="mini-card-co">Company / Institute</div>
+          <div class="mini-card-contact">📞 +91 98765 43210</div>
+          <div class="mini-card-contact">✉ your@email.com</div>
+          <div class="mini-card-brand">MEECARDS.IN</div>
+        </div>
+      </div>
+      <div class="mini-preview-info">
+        <p>Your card updates <strong>live</strong> as you type. Fill in all fields, then click <strong>"See My Cards"</strong> to browse 30 stunning designs — free and premium.</p>
+      </div>
+    </div>
+
+    <!-- FORM -->
     <div class="form-grid">
+      <!-- Avatar -->
       <div class="avatar-row">
-        <div class="av-circle" id="avCircle" onclick="document.getElementById('photoInput').click()">
+        <div class="av-circle" id="avCircle" onclick="document.getElementById('photoInput').click()" title="Upload your photo">
           <img id="avPreview" src="" alt=""/>
           <span id="avEmoji">📸</span>
         </div>
         <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhoto(this)"/>
-        <div class="upload-hint"><strong style="color:var(--text);">Upload your photo</strong><br>Click the circle · JPG or PNG · Optional</div>
+        <div class="upload-hint"><strong style="color:var(--text);">Upload your photo</strong><br>Optional · JPG or PNG · Click the circle</div>
       </div>
-      <div class="fg"><label>Full Name</label><input type="text" id="f_name" placeholder="e.g. Ravi Kumar" maxlength="28"/></div>
-      <div class="fg"><label>Designation</label><input type="text" id="f_role" placeholder="e.g. Sales Manager" maxlength="28"/></div>
-      <div class="fg"><label>Company / Institute</label><input type="text" id="f_company" placeholder="e.g. Reliance Ltd." maxlength="28"/></div>
-      <div class="fg"><label>Phone Number</label><input type="tel" id="f_phone" placeholder="+91 98765 43210" maxlength="16"/></div>
-      <div class="fg"><label>Email Address</label><input type="email" id="f_email" placeholder="you@email.com" maxlength="34"/></div>
-      <div class="fg"><label>Website / LinkedIn</label><input type="text" id="f_web" placeholder="linkedin.com/in/you" maxlength="34"/></div>
-      <div class="fg full"><label>WhatsApp Number (optional)</label><input type="tel" id="f_wa" placeholder="+91 98765 43210" maxlength="16"/></div>
+
+      <div class="fg" id="fg_name">
+        <label>Full Name *</label>
+        <input type="text" id="f_name" placeholder="e.g. Ravi Kumar" maxlength="28" oninput="onFieldInput('name')"/>
+        <div class="field-err" id="err_name">Please enter your name</div>
+      </div>
+      <div class="fg" id="fg_role">
+        <label>Designation *</label>
+        <input type="text" id="f_role" placeholder="e.g. Sales Manager" maxlength="28" oninput="onFieldInput('role')"/>
+        <div class="field-err" id="err_role">Please enter your designation</div>
+      </div>
+      <div class="fg" id="fg_company">
+        <label>Company / Institute *</label>
+        <input type="text" id="f_company" placeholder="e.g. Reliance Ltd." maxlength="28" oninput="onFieldInput('company')"/>
+        <div class="field-err" id="err_company">Please enter your company or institute</div>
+      </div>
+      <div class="fg" id="fg_phone">
+        <label>Phone Number *</label>
+        <input type="tel" id="f_phone" placeholder="+91 98765 43210" maxlength="16" oninput="onFieldInput('phone')"/>
+        <div class="field-err" id="err_phone">Please enter a valid phone number</div>
+      </div>
+      <div class="fg" id="fg_email">
+        <label>Email Address *</label>
+        <input type="email" id="f_email" placeholder="you@email.com" maxlength="40" oninput="onFieldInput('email')"/>
+        <div class="field-err" id="err_email">Please enter a valid email address</div>
+      </div>
+      <div class="fg" id="fg_website">
+        <label>Website / LinkedIn</label>
+        <input type="text" id="f_web" placeholder="linkedin.com/in/you" maxlength="40" oninput="updateMiniPreview()"/>
+      </div>
+      <div class="fg full" id="fg_wa">
+        <label>WhatsApp Number</label>
+        <input type="tel" id="f_wa" placeholder="+91 98765 43210 (optional)" maxlength="16" oninput="updateMiniPreview()"/>
+      </div>
     </div>
-    <button class="see-btn" onclick="openGallery()">
+
+    <button class="see-btn" id="seebtn" onclick="openGallery()" disabled>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
-      See My Cards — Browse 240 Unique Designs
+      See My Cards — Browse 30 Trending Designs
     </button>
-    <p class="bnote">✨ Every design is completely unique · Click any card to select · Then download or order NFC</p>
+    <p class="bnote" id="buildNote">⚠ Fill in the required fields above to unlock your card gallery</p>
   </div>
 </section>
 
-<!-- ─── FEATURES ─── -->
+<!-- ═══════════════════════════════════════
+     FEATURES
+═══════════════════════════════════════ -->
 <section id="features">
   <div class="features-layout">
     <div>
-      <div class="sec-label">Why TapID</div>
+      <div class="sec-label">Why MeeCards</div>
       <h2 class="sec-title">Everything a paper card can't do</h2>
       <p class="sec-sub">Built for India's professionals who deserve better than a cardboard rectangle.</p>
       <div class="feature-list-big">
-        <div class="feature-item"><div class="feature-icon" style="background:rgba(255,107,0,0.15);">📲</div><div><h4>WhatsApp One-Tap Connect</h4><p>Every TapID card has a built-in WhatsApp button. One tap — they're in your chat. No number typing, no searching.</p></div></div>
-        <div class="feature-item"><div class="feature-icon" style="background:rgba(0,201,167,0.12);">📄</div><div><h4>Document Vault</h4><p>Store and share Aadhar, PAN, Resume, certificates, and marksheets — securely, with one shareable link.</p></div></div>
-        <div class="feature-item"><div class="feature-icon" style="background:rgba(212,160,23,0.12);">📊</div><div><h4>Lead Capture + Analytics</h4><p>Know who viewed your card, when, and from where. Auto-capture contact info from every profile visit.</p></div></div>
-        <div class="feature-item"><div class="feature-icon" style="background:rgba(255,107,0,0.15);">🔒</div><div><h4>Offline QR Code</h4><p>Your QR works without internet. Print it on a banner or visiting card — it always opens your profile.</p></div></div>
-        <div class="feature-item"><div class="feature-icon" style="background:rgba(0,201,167,0.12);">✏️</div><div><h4>Update Anytime, Same Card</h4><p>Changed jobs? New number? Update your profile in seconds. Your card link and QR never change — ever.</p></div></div>
+        <div class="feature-item"><div class="feature-icon" style="background:rgba(255,107,0,.15);">📲</div><div><h4>WhatsApp One-Tap Connect</h4><p>Every MeeCard has a built-in WhatsApp button. One tap — they're in your chat instantly.</p></div></div>
+        <div class="feature-item"><div class="feature-icon" style="background:rgba(0,201,167,.12);">📄</div><div><h4>Document Vault</h4><p>Store and share Aadhar, PAN, Resume, certificates — securely, with one shareable link.</p></div></div>
+        <div class="feature-item"><div class="feature-icon" style="background:rgba(212,160,23,.12);">📊</div><div><h4>Lead Capture + Analytics</h4><p>Know who viewed your card, when, and from where. Auto-capture contacts from every visit.</p></div></div>
+        <div class="feature-item"><div class="feature-icon" style="background:rgba(255,107,0,.15);">🔒</div><div><h4>Offline QR Code</h4><p>Your QR works without internet. Print it on a banner or resume — always opens your profile.</p></div></div>
+        <div class="feature-item"><div class="feature-icon" style="background:rgba(0,201,167,.12);">✏️</div><div><h4>Update Anytime, Same Card</h4><p>Changed jobs? New number? Update instantly. Your card link and QR never change.</p></div></div>
       </div>
     </div>
     <div class="features-right">
       <div class="feat-stat"><div class="big">10x</div><p>More connections made vs paper cards — because people actually keep your link</p></div>
       <div class="feat-stat"><div class="big">₹0</div><p>Reprint cost when you change your info. Paper cards cost ₹2,000 every reprint</p></div>
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:24px;">
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-md);padding:24px;">
         <h4 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:16px;">Works everywhere</h4>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;align-items:center;gap:10px;font-size:13px;"><span style="color:var(--teal);">✓</span> No app install needed to view</div>
           <div style="display:flex;align-items:center;gap:10px;font-size:13px;"><span style="color:var(--teal);">✓</span> Works on Android & iPhone</div>
           <div style="display:flex;align-items:center;gap:10px;font-size:13px;"><span style="color:var(--teal);">✓</span> Shareable via WhatsApp, SMS, email</div>
           <div style="display:flex;align-items:center;gap:10px;font-size:13px;"><span style="color:var(--teal);">✓</span> NFC tap on any modern phone</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;"><span style="color:var(--teal);">✓</span> Works offline (QR)</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;"><span style="color:var(--teal);">✓</span> Works offline via QR code</div>
         </div>
       </div>
-      <div style="background:linear-gradient(135deg,rgba(255,107,0,0.1),rgba(212,160,23,0.08));border:1px solid rgba(255,107,0,0.2);border-radius:16px;padding:24px;">
+      <div style="background:linear-gradient(135deg,rgba(255,107,0,.1),rgba(212,160,23,.08));border:1px solid rgba(255,107,0,.2);border-radius:var(--radius-md);padding:24px;">
         <div style="font-size:28px;margin-bottom:10px;">🇮🇳</div>
         <h4 style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:8px;">Made for Bharat</h4>
         <p style="font-size:13px;color:var(--muted);line-height:1.7;">UPI payments, Telugu & Hindi support, WhatsApp-first design, Aadhar/PAN vault — pricing that works for every pocket.</p>
@@ -422,7 +696,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:64px 48px
   </div>
 </section>
 
-<!-- ─── REVIEWS ─── -->
+<!-- ═══════════════════════════════════════
+     REVIEWS
+═══════════════════════════════════════ -->
 <section id="reviews">
   <div class="reviews-header">
     <div class="sec-label">Reviews</div>
@@ -430,175 +706,484 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:64px 48px
     <p class="sec-sub">From Anantapur to Bangalore — real professionals, real results.</p>
   </div>
   <div class="reviews-grid">
-    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"I'm an LIC agent and used to carry 300 paper cards every month. Now I just tap my TapID card and people get my full profile on WhatsApp. I've already saved ₹3,000 on printing this year alone."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(255,107,0,0.2);">🙋‍♂️</div><div><div class="reviewer-name">Suresh Reddy</div><div class="reviewer-role">LIC Agent · Anantapur</div></div></div></div>
-    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"As a final-year engineering student, I put my TapID QR on my resume. During campus placement, one interviewer said my profile was the most professional they'd seen. Got the job!"</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(0,201,167,0.15);">🎓</div><div><div class="reviewer-name">Priya Lakshmi</div><div class="reviewer-role">B.Tech Student · JNTUA</div></div></div></div>
-    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"My real estate team of 8 people now has uniform TapID profiles. I can see all their leads in one dashboard. We closed 2 extra deals last month because the follow-up reminders actually worked."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(212,160,23,0.15);">🏢</div><div><div class="reviewer-name">Anil Sharma</div><div class="reviewer-role">Real Estate Developer · Kurnool</div></div></div></div>
-    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"I'm a graphic designer and my entire portfolio used to be scattered across Behance, Instagram, and Google Drive. TapID gave me one link that has everything. Clients actually call me now."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(255,107,0,0.12);">💻</div><div><div class="reviewer-name">Deepika Nair</div><div class="reviewer-role">Freelance Designer · Hyderabad</div></div></div></div>
-    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"The NFC card is insane. I just tap my card on someone's phone and boom — my profile is on their screen. People always ask 'what is this magic?' It starts a conversation every single time."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(0,201,167,0.12);">📱</div><div><div class="reviewer-name">Rahul Krishnan</div><div class="reviewer-role">Sales Executive · Vijayawada</div></div></div></div>
-    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"We gave TapID to all 450 final-year students as part of placement prep. 12 students said interviewers specifically praised their digital profile. Best ₹11,000 we ever spent as a college."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(212,160,23,0.12);">🏫</div><div><div class="reviewer-name">Dr. Venkat Rao</div><div class="reviewer-role">Placement Officer · Sri KV University</div></div></div></div>
+    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"I'm an LIC agent and used to carry 300 paper cards every month. Now I just tap my MeeCard and people get my full profile instantly. I've already saved ₹3,000 on printing this year alone."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(255,107,0,.2);">🙋‍♂️</div><div><div class="reviewer-name">Suresh Reddy</div><div class="reviewer-role">LIC Agent · Anantapur</div></div></div></div>
+    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"As a final-year engineering student, I put my MeeCard QR on my resume. During campus placement, one interviewer said my profile was the most professional they'd seen. Got the job!"</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(0,201,167,.15);">🎓</div><div><div class="reviewer-name">Priya Lakshmi</div><div class="reviewer-role">B.Tech Student · JNTUA</div></div></div></div>
+    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"My real estate team of 8 now has uniform MeeCard profiles. I can see all their leads in one dashboard. We closed 2 extra deals last month because the follow-up reminders worked."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(212,160,23,.15);">🏢</div><div><div class="reviewer-name">Anil Sharma</div><div class="reviewer-role">Real Estate Developer · Kurnool</div></div></div></div>
+    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"I'm a graphic designer and my portfolio used to be scattered across Behance, Instagram, and Drive. MeeCards gave me one link with everything. Clients actually call me now."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(255,107,0,.12);">💻</div><div><div class="reviewer-name">Deepika Nair</div><div class="reviewer-role">Freelance Designer · Hyderabad</div></div></div></div>
+    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"The NFC card is amazing. I just tap my card on someone's phone and my profile is on their screen. People always ask 'what is this magic?' It starts a conversation every single time."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(0,201,167,.12);">📱</div><div><div class="reviewer-name">Rahul Krishnan</div><div class="reviewer-role">Sales Executive · Vijayawada</div></div></div></div>
+    <div class="review-card"><div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="review-text">"We gave MeeCards to all 450 final-year students as placement prep. 12 students said interviewers specifically praised their digital profile. Best ₹11,000 we ever spent as a college."</p><div class="reviewer"><div class="reviewer-avatar" style="background:rgba(212,160,23,.12);">🏫</div><div><div class="reviewer-name">Dr. Venkat Rao</div><div class="reviewer-role">Placement Officer · Sri KV University</div></div></div></div>
   </div>
 </section>
 
-<!-- ─── FAQ ─── -->
+<!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
 <section id="faq">
   <div class="faq-layout">
     <div>
       <div class="sec-label">FAQ</div>
       <h2 class="sec-title">Questions? We have answers.</h2>
-      <p class="sec-sub" style="margin-bottom:32px;">Everything you need to know about TapID — quick, clear, no jargon.</p>
-      <div style="background:linear-gradient(135deg,rgba(255,107,0,0.08),transparent);border:1px solid rgba(255,107,0,0.2);border-radius:16px;padding:24px;">
+      <p class="sec-sub" style="margin-bottom:32px;">Everything about MeeCards — quick, clear, no jargon.</p>
+      <div style="background:linear-gradient(135deg,rgba(255,107,0,.08),transparent);border:1px solid rgba(255,107,0,.2);border-radius:var(--radius-md);padding:24px;">
         <div style="font-size:24px;margin-bottom:10px;">💬</div>
         <h4 style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px;">Still have questions?</h4>
         <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Chat with us on WhatsApp — we reply in minutes.</p>
-        <a href="https://wa.me/919876543210" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 20px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Chat on WhatsApp</a>
+        <a href="https://wa.me/919876543210" style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 20px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
       </div>
     </div>
     <div class="faq-list">
-      <div class="faq-item open"><div class="faq-q" onclick="toggleFaq(this)">What is TapID and how is it different from a visiting card?<div class="faq-icon">+</div></div><div class="faq-a">TapID is a living digital identity profile — not a static card. A paper card gets lost, can't be updated, and gives you zero data. TapID is a link and QR code that opens your full professional profile: photo, contact, portfolio, documents, and a WhatsApp connect button. It updates in real-time and tracks who viewed it.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Does the person receiving my card need an app?<div class="faq-icon">+</div></div><div class="faq-a">No. Your TapID profile opens in any browser — Chrome, Safari, anything. The person receiving your card doesn't need to download or install anything. Zero friction.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does the NFC card work?<div class="faq-icon">+</div></div><div class="faq-a">An NFC card has a tiny chip embedded inside. When you tap it against the back of a modern smartphone (Android or iPhone 7+), the phone reads the chip and automatically opens your TapID profile. No scanning, no typing. Just tap and connect.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I update my profile after downloading or printing?<div class="faq-icon">+</div></div><div class="faq-a">Yes — that's one of TapID's biggest advantages. Your QR code and NFC card always point to the same profile URL. You can change your phone number, company, photo, or any detail at any time. The physical card or printed QR code never needs to be replaced.</div></div>
+      <div class="faq-item open"><div class="faq-q" onclick="toggleFaq(this)">What is MeeCards and how is it different from a visiting card?<div class="faq-icon">+</div></div><div class="faq-a">MeeCards is a living digital identity profile — not a static card. A paper card gets lost, can't be updated, and gives you zero data. MeeCards is a link and QR code that opens your full professional profile: photo, contact, portfolio, documents, and a WhatsApp connect button. It updates in real-time and tracks who viewed it.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Does the person receiving my card need an app?<div class="faq-icon">+</div></div><div class="faq-a">No. Your MeeCard profile opens in any browser — Chrome, Safari, anything. The person receiving your card doesn't need to download or install anything. Zero friction.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does the NFC card work?<div class="faq-icon">+</div></div><div class="faq-a">An NFC card has a tiny chip embedded inside. When you tap it against the back of a modern smartphone (Android or iPhone 7+), the phone reads the chip and automatically opens your MeeCards profile. No scanning, no typing. Just tap and connect.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I update my profile after printing?<div class="faq-icon">+</div></div><div class="faq-a">Yes — that's MeeCards' biggest advantage. Your QR code and NFC card always point to the same profile URL. You can change your number, company, photo, or any detail anytime. The physical card never needs to be replaced.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is my personal data and documents safe?<div class="faq-icon">+</div></div><div class="faq-a">Absolutely. Your documents are stored with bank-level encryption. Only you control who can see them. We never sell your data to third parties.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does NFC card delivery take?<div class="faq-icon">+</div></div><div class="faq-a">NFC cards are shipped across India via courier and arrive within 5–7 business days. Your digital card is ready instantly — the physical card just arrives later.</div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept?<div class="faq-icon">+</div></div><div class="faq-a">We accept all major Indian payment methods — UPI (Google Pay, PhonePe, Paytm), debit & credit cards, net banking, and EMI. All payments are processed securely via Razorpay.</div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is there a free plan? What does it include?<div class="faq-icon">+</div></div><div class="faq-a">Yes, TapID is free forever for basic use. The free plan includes your profile link, QR code, WhatsApp connect button, and 1 document upload. Upgrade to Pro (₹99/month) for unlimited documents, lead capture, analytics, and a custom profile URL.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is there a free plan? What does it include?<div class="faq-icon">+</div></div><div class="faq-a">Yes, MeeCards is free forever for basic use. The free plan includes your profile link, QR code, WhatsApp connect button, and 1 document upload. Upgrade to Pro (₹99/month) for unlimited documents, lead capture, analytics, and a custom URL.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
 <footer>
   <div class="footer-top">
-    <div class="footer-brand"><a href="#" class="logo">TAP<em>ID</em></a><p>India's smartest digital identity platform. Built for professionals, students, and businesses across Bharat. Starting from Anantapur.</p><div style="display:flex;align-items:center;gap:8px;margin-top:16px;font-size:13px;color:var(--muted2);"><span>🇮🇳</span> Made in India · Anantapur, AP</div></div>
-    <div class="footer-col"><h5>Product</h5><ul><li><a href="#builder">Create Card</a></li><li><a href="#types">Card Types</a></li><li><a href="#features">Features</a></li><li><a href="#">Pricing</a></li><li><a href="#">NFC Cards</a></li></ul></div>
-    <div class="footer-col"><h5>Company</h5><ul><li><a href="#">About TapID</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div class="footer-brand">
+      <a href="#" class="logo">Mee<em>Cards</em></a>
+      <p>India's smartest digital identity platform. Built for professionals, students, and businesses across Bharat. Starting from Anantapur, AP.</p>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:16px;font-size:13px;color:var(--muted2);"><span>🇮🇳</span> Made in India · meecards.in</div>
+    </div>
+    <div class="footer-col"><h5>Product</h5><ul><li><a href="#builder">Build Card</a></li><li><a href="#types">Card Types</a></li><li><a href="#features">Features</a></li><li><a href="#">Pricing</a></li><li><a href="#">NFC Cards</a></li></ul></div>
+    <div class="footer-col"><h5>Company</h5><ul><li><a href="#">About Us</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul></div>
     <div class="footer-col"><h5>Legal</h5><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Refund Policy</a></li><li><a href="#">Cookie Policy</a></li><li><a href="#">Security</a></li></ul></div>
   </div>
-  <div class="footer-bottom"><span>© 2025 TapID. All rights reserved. · tapid.in</span><div class="footer-socials"><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">in</a><a href="#" class="social-btn">📸</a><a href="#" class="social-btn">▶</a></div></div>
+  <div class="footer-bottom">
+    <span>© 2025 MeeCards · meecards.in · All rights reserved.</span>
+    <div class="footer-socials">
+      <a href="#" class="social-btn">𝕏</a>
+      <a href="#" class="social-btn">in</a>
+      <a href="#" class="social-btn">📸</a>
+      <a href="#" class="social-btn">▶</a>
+    </div>
+  </div>
 </footer>
 
-<!-- GALLERY OVERLAY -->
+<!-- ═══════════════════════════════════════
+     GALLERY OVERLAY
+═══════════════════════════════════════ -->
 <div id="galleryOverlay">
   <div class="gnav">
-    <div class="gnav-title">Choose Your <em>TapID</em> Design</div>
+    <div class="gnav-left">
+      <div class="gnav-title">Choose Your <em>MeeCard</em> Design</div>
+      <div class="gcnt" id="gcnt">30 designs</div>
+    </div>
+    <div class="gallery-controls">
+      <input type="text" class="g-search" id="gSearch" placeholder="🔍 Search designs..." oninput="filterTemplates()"/>
+      <div class="g-filter">
+        <button class="g-filter-btn active" onclick="setFilter('all',this)">All</button>
+        <button class="g-filter-btn" onclick="setFilter('free',this)">Free</button>
+        <button class="g-filter-btn" onclick="setFilter('premium',this)">Premium</button>
+        <button class="g-filter-btn" onclick="setFilter('trending',this)">🔥 Trending</button>
+      </div>
+    </div>
     <div class="gnav-right">
-      <div class="gcnt">240 unique designs</div>
       <button class="gclose" onclick="closeGallery()">✕</button>
     </div>
   </div>
-  <div class="gscroll"><div class="ggrid" id="ggrid"></div></div>
+
+  <div class="gscroll" id="gscroll">
+    <!-- Favourites strip -->
+    <div class="fav-strip" id="favStrip">
+      <div class="gallery-section-header">
+        <h3>❤️ Your Favourites</h3>
+      </div>
+      <div class="ggrid" id="favGrid"></div>
+    </div>
+    <!-- Trending section -->
+    <div class="gallery-section-header">
+      <h3>Trending Now</h3>
+      <span class="trending-badge">🔥 HOT</span>
+    </div>
+    <div class="ggrid" id="trendingGrid"></div>
+    <!-- All templates section -->
+    <div class="gallery-section-header" id="allHeader">
+      <h3>All Designs</h3>
+    </div>
+    <div class="ggrid" id="ggrid"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="icon">🔍</div>
+      <p>No designs match your search. Try a different keyword.</p>
+    </div>
+  </div>
+
   <div class="gfooter">
     <div class="gsel-info" id="gselInfo">👆 Click any card to select your favourite design</div>
-    <button class="gproceed" id="gproceedBtn" disabled onclick="openPaymentModal()">Download This Card →</button>
+    <div class="gfooter-btns">
+      <button class="gedit-btn" id="geditBtn" disabled onclick="openEditor()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        Edit Card
+      </button>
+      <button class="gproceed" id="gproceedBtn" disabled onclick="handleProceed()">Download This Card →</button>
+    </div>
   </div>
 </div>
 
-<!-- PAYMENT MODAL -->
+<!-- ═══════════════════════════════════════
+     CARD EDITOR PANEL
+═══════════════════════════════════════ -->
+<div id="editorOverlay" style="display:none;">
+  <div id="editorPanel">
+    <div class="ep-header">
+      <div class="ep-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color:var(--saffron)"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        Customise Card
+      </div>
+      <button class="ep-close" onclick="closeEditor()">✕</button>
+    </div>
+    <div class="ep-preview-wrap">
+      <div class="ep-preview-label">Live Preview</div>
+      <div id="epCardWrap"></div>
+    </div>
+    <div class="ep-scroll">
+      <!-- Background -->
+      <div class="ep-section">
+        <div class="ep-section-title">🎨 Background</div>
+        <div class="ep-row"><label class="ep-label">Type</label><div class="ep-toggle-row"><button class="ep-toggle active" id="bgSolidBtn" onclick="setBgType('solid',this)">Solid</button><button class="ep-toggle" id="bgGradBtn" onclick="setBgType('gradient',this)">Gradient</button></div></div>
+        <div class="ep-row" id="bgSolidRow"><label class="ep-label">Colour</label><div style="display:flex;align-items:center;gap:10px;"><input type="color" id="ep_bgColor" value="#0a0a14" oninput="syncColorVal('ep_bgColor','ep_bgColorVal');applyEditorLive()" class="ep-color-input"/><span class="ep-color-val" id="ep_bgColorVal">#0a0a14</span></div></div>
+        <div id="bgGradRow" style="display:none;">
+          <div class="ep-row"><label class="ep-label">Colour 1</label><div style="display:flex;align-items:center;gap:10px;"><input type="color" id="ep_grad1" value="#0a0a14" oninput="syncColorVal('ep_grad1','ep_grad1Val');applyEditorLive()" class="ep-color-input"/><span class="ep-color-val" id="ep_grad1Val">#0a0a14</span></div></div>
+          <div class="ep-row"><label class="ep-label">Colour 2</label><div style="display:flex;align-items:center;gap:10px;"><input type="color" id="ep_grad2" value="#12122a" oninput="syncColorVal('ep_grad2','ep_grad2Val');applyEditorLive()" class="ep-color-input"/><span class="ep-color-val" id="ep_grad2Val">#12122a</span></div></div>
+          <div class="ep-row"><label class="ep-label">Angle</label><input type="range" id="ep_gradAngle" min="0" max="360" value="135" oninput="document.getElementById('ep_gradAngleVal').textContent=this.value+'°';applyEditorLive()" class="ep-range"/><span class="ep-range-val" id="ep_gradAngleVal">135°</span></div>
+        </div>
+        <div class="ep-row"><label class="ep-label">Presets</label><div class="ep-swatch-row" id="bgPresets"></div></div>
+      </div>
+      <!-- Typography -->
+      <div class="ep-section">
+        <div class="ep-section-title">✏️ Typography</div>
+        <div class="ep-row"><label class="ep-label">Font</label><select id="ep_font" onchange="applyEditorLive()" class="ep-select"><option value="'Syne',sans-serif">Syne (Modern)</option><option value="'Instrument Sans',sans-serif">Instrument Sans</option><option value="Georgia,serif">Georgia (Serif)</option><option value="'Courier New',monospace">Courier (Tech)</option><option value="Arial,sans-serif">Arial</option><option value="'Trebuchet MS',sans-serif">Trebuchet</option><option value="impact,sans-serif">Impact (Strong)</option></select></div>
+        <div class="ep-row"><label class="ep-label">Name Size</label><input type="range" id="ep_nameSize" min="11" max="24" value="16" oninput="document.getElementById('ep_nameSzVal').textContent=this.value+'px';applyEditorLive()" class="ep-range"/><span class="ep-range-val" id="ep_nameSzVal">16px</span></div>
+        <div class="ep-row"><label class="ep-label">Body Size</label><input type="range" id="ep_bodySize" min="8" max="16" value="11" oninput="document.getElementById('ep_bodySzVal').textContent=this.value+'px';applyEditorLive()" class="ep-range"/><span class="ep-range-val" id="ep_bodySzVal">11px</span></div>
+      </div>
+      <!-- Colours -->
+      <div class="ep-section">
+        <div class="ep-section-title">🖌️ Text & Accent</div>
+        <div class="ep-row"><label class="ep-label">Text</label><div style="display:flex;align-items:center;gap:10px;"><input type="color" id="ep_textColor" value="#f0eee8" oninput="syncColorVal('ep_textColor','ep_textColorVal');applyEditorLive()" class="ep-color-input"/><span class="ep-color-val" id="ep_textColorVal">#f0eee8</span></div></div>
+        <div class="ep-row"><label class="ep-label">Accent</label><div style="display:flex;align-items:center;gap:10px;"><input type="color" id="ep_accentColor" value="#FF6B00" oninput="syncColorVal('ep_accentColor','ep_accentColorVal');applyEditorLive()" class="ep-color-input"/><span class="ep-color-val" id="ep_accentColorVal">#FF6B00</span></div></div>
+        <div class="ep-row"><label class="ep-label">Presets</label><div class="ep-swatch-row" id="accentPresets"></div></div>
+      </div>
+      <!-- Card Style -->
+      <div class="ep-section">
+        <div class="ep-section-title">📐 Card Style</div>
+        <div class="ep-row"><label class="ep-label">Radius</label><input type="range" id="ep_radius" min="0" max="32" value="18" oninput="document.getElementById('ep_radiusVal').textContent=this.value+'px';applyEditorLive()" class="ep-range"/><span class="ep-range-val" id="ep_radiusVal">18px</span></div>
+        <div class="ep-row"><label class="ep-label">Pattern</label><select id="ep_pattern" onchange="applyEditorLive()" class="ep-select"><option value="0">Circles</option><option value="1">Diagonal Lines</option><option value="2">Triangle</option><option value="3">Wave</option><option value="4">Rectangle</option><option value="5">Two Circles</option><option value="6">Arc</option><option value="7">Hexagon</option><option value="8">None</option><option value="9">Cross Lines</option></select></div>
+        <div class="ep-row"><label class="ep-label">Shadow</label><div class="ep-toggle-row"><button class="ep-toggle active" id="shadowOnBtn" onclick="setShadow(true,this)">On</button><button class="ep-toggle" id="shadowOffBtn" onclick="setShadow(false,this)">Off</button></div></div>
+        <div class="ep-row"><label class="ep-label">Border</label><div class="ep-toggle-row"><button class="ep-toggle" id="borderOnBtn" onclick="setBorderOn(true,this)">Show</button><button class="ep-toggle active" id="borderOffBtn" onclick="setBorderOn(false,this)">Hide</button></div></div>
+        <div class="ep-row" id="borderColorRow" style="display:none;"><label class="ep-label">Border Colour</label><input type="color" id="ep_borderColor" value="#FF6B00" oninput="applyEditorLive()" class="ep-color-input"/></div>
+      </div>
+      <!-- Layout -->
+      <div class="ep-section">
+        <div class="ep-section-title">🗂️ Layout</div>
+        <div class="ep-row"><label class="ep-label">Style</label><select id="ep_layout" onchange="applyEditorLive()" class="ep-select"><option value="standard">Standard</option><option value="compact">Compact</option><option value="wide-avatar">Wide Avatar</option><option value="minimal">Minimal</option><option value="bold-name">Bold Name</option><option value="centered">Centered</option><option value="split">Split</option><option value="pill-contacts">Pill Contacts</option><option value="icon-row">Icon Row</option><option value="sidebar">Sidebar</option></select></div>
+      </div>
+      <button class="ep-apply-btn" onclick="applyToCard()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+        Apply & Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAYMENT MODAL
+═══════════════════════════════════════ -->
 <div class="modal-overlay" id="paymentModal">
   <div class="modal">
     <button class="modal-close" onclick="closePaymentModal()">✕</button>
-    <h3>Get Your TapID Card</h3>
-    <p class="modal-sub">Your card is ready. Choose a plan to download your digital card or order a physical NFC card — delivered across India.</p>
+    <h3>Get Your MeeCard</h3>
+    <p class="modal-sub">Your card is ready. Choose a plan to download or order a physical NFC card.</p>
     <div class="plan-cards">
-      <!-- FREE -->
       <div class="plan-card" onclick="selectPlan(this,'free')">
-        <div class="plan-left">
-          <div class="plan-name">Digital Card — Free</div>
-          <div class="plan-desc">Download card as PNG — instant</div>
-        </div>
+        <div class="plan-left"><div class="plan-name">Digital Card — Free</div><div class="plan-desc">Download your card as PNG — instant</div></div>
         <div class="plan-price">₹0</div>
         <div class="plan-radio"></div>
       </div>
-      <!-- PRO -->
       <div class="plan-card selected" onclick="selectPlan(this,'pro')">
-        <div class="plan-left">
-          <div class="plan-name">Pro Digital Card</div>
-          <div class="plan-desc">Live link + lead capture + analytics</div>
-          <div class="popular-badge">Popular</div>
-        </div>
+        <div class="plan-left"><div class="plan-name">Pro Digital Card</div><div class="plan-desc">Live link + lead capture + analytics</div><div class="popular-badge">Popular</div></div>
         <div class="plan-price">₹99<span style="font-size:11px;color:var(--muted);font-weight:400;font-family:'Instrument Sans',sans-serif;">/mo</span></div>
         <div class="plan-radio" style="background:var(--saffron);border-color:var(--saffron);"></div>
       </div>
-      <!-- NFC -->
       <div class="plan-card" onclick="selectPlan(this,'nfc')">
-        <div class="plan-left">
-          <div class="plan-name">NFC Elite Card + Pro</div>
-          <div class="plan-desc">Physical card delivered + all Pro</div>
-        </div>
+        <div class="plan-left"><div class="plan-name">NFC Elite Card + Pro</div><div class="plan-desc">Physical card delivered + all Pro features</div></div>
         <div class="plan-price">₹398<span style="font-size:11px;color:var(--muted);font-weight:400;font-family:'Instrument Sans',sans-serif;">/mo</span></div>
         <div class="plan-radio"></div>
       </div>
     </div>
     <button class="pay-btn" id="payBtn" onclick="handlePayment()">Pay ₹99 with Razorpay / UPI →</button>
     <div id="downloadProgress">
-      <p id="downloadMsg">Preparing your card...</p>
+      <p id="downloadMsg">Generating your card...</p>
       <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
     </div>
-    <div class="pay-secure"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg> Secured by Razorpay · UPI · Cards · Net Banking</div>
+    <div class="pay-secure">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      Secured by Razorpay · UPI · Cards · Net Banking
+    </div>
   </div>
 </div>
 
+<!-- Premium unlock modal -->
+<div class="modal-overlay" id="premiumModal">
+  <div class="modal" style="max-width:380px;">
+    <button class="modal-close" onclick="document.getElementById('premiumModal').classList.remove('open')">✕</button>
+    <div class="premium-icon">🔒</div>
+    <h3 style="text-align:center;">Premium Design</h3>
+    <p class="modal-sub" style="text-align:center;" id="premiumModalDesc">Unlock this design and all premium features with MeeCards Pro.</p>
+    <ul class="premium-features" id="premiumFeatureList"></ul>
+    <button class="pay-btn" onclick="document.getElementById('premiumModal').classList.remove('open');openPaymentModal()">Unlock for ₹99/month →</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast">✅ Done</div>
+
 <script>
-// ─── STATE ───
+'use strict';
+/* ════════════════════════════════════════════════════════
+   MODULE 1: USER DATA
+════════════════════════════════════════════════════════ */
+let userData = {
+  name:'', role:'', company:'', phone:'', email:'',
+  website:'', whatsapp:'', avatar:null
+};
 let userPhoto = null;
-let selectedIdx = -1;
+let selectedTemplateId = null;
+let favourites = JSON.parse(localStorage.getItem('mc_favs') || '[]');
+let currentFilter = 'all';
+let editorState = {
+  bgType:'gradient', bgColor:'#0a0a14', grad1:'#0a0a14', grad2:'#12122a',
+  gradAngle:135, textColor:'#f0eee8', accentColor:'#FF6B00',
+  font:"'Syne',sans-serif", nameSize:16, bodySize:11, radius:18,
+  pattern:0, shadow:true, border:false, borderColor:'#FF6B00', layout:'standard'
+};
 
 function handlePhoto(input){
   if(!input.files[0]) return;
-  const r=new FileReader();
-  r.onload=e=>{
-    userPhoto=e.target.result;
-    const img=document.getElementById('avPreview');
-    img.src=userPhoto; img.style.display='block';
-    document.getElementById('avEmoji').style.display='none';
+  const r = new FileReader();
+  r.onload = e => {
+    userPhoto = e.target.result;
+    userData.avatar = e.target.result;
+    const img = document.getElementById('avPreview');
+    img.src = userPhoto; img.style.display = 'block';
+    document.getElementById('avEmoji').style.display = 'none';
+    updateMiniPreview();
   };
   r.readAsDataURL(input.files[0]);
 }
 
-function getUD(){
-  return{
-    name:   document.getElementById('f_name').value.trim()   ||'Your Name',
-    role:   document.getElementById('f_role').value.trim()   ||'Designation',
-    co:     document.getElementById('f_company').value.trim()||'Company / Institute',
-    phone:  document.getElementById('f_phone').value.trim()  ||'+91 98765 43210',
-    email:  document.getElementById('f_email').value.trim()  ||'your@email.com',
-    web:    document.getElementById('f_web').value.trim()    ||'tapid.in/you',
-    wa:     document.getElementById('f_wa').value.trim()     ||''
-  };
+function getFieldVal(id){ return document.getElementById(id).value.trim(); }
+
+function syncUserData(){
+  userData.name     = getFieldVal('f_name');
+  userData.role     = getFieldVal('f_role');
+  userData.company  = getFieldVal('f_company');
+  userData.phone    = getFieldVal('f_phone');
+  userData.email    = getFieldVal('f_email');
+  userData.website  = getFieldVal('f_web');
+  userData.whatsapp = getFieldVal('f_wa');
 }
 
-// ─── 240 DESIGNS ───
-// Built from 24 palettes × 10 layouts
-const PALETTES=[
-  ['linear-gradient(135deg,#0a0a14,#12122a)','#f0eee8','#FF6B00','rgba(255,107,0,.22)'],
-  ['linear-gradient(135deg,#FF6B00,#c94d00)','#ffffff','#fff0cc','rgba(255,255,255,.22)'],
-  ['linear-gradient(135deg,#00796B,#004D40)','#ffffff','#a7ffeb','rgba(255,255,255,.18)'],
-  ['linear-gradient(135deg,#1a1200,#3d2c00)','#D4A017','#ff9800','rgba(212,160,23,.22)'],
-  ['linear-gradient(135deg,#0D0D1A,#1a0a2e)','#e0d4ff','#b39ddb','rgba(179,157,219,.2)'],
-  ['linear-gradient(135deg,#1a0810,#3d0d24)','#ffb3c8','#ff6b9d','rgba(255,107,157,.2)'],
-  ['linear-gradient(135deg,#001a33,#003366)','#b3d9ff','#66b3ff','rgba(102,179,255,.2)'],
-  ['linear-gradient(135deg,#0a1a0a,#0d3d0d)','#b3ffb3','#66ff66','rgba(102,255,102,.2)'],
-  ['linear-gradient(135deg,#181818,#303030)','#ffffff','#cccccc','rgba(255,255,255,.14)'],
-  ['linear-gradient(135deg,#2d0a0a,#5c1212)','#ffcccc','#ff6666','rgba(255,102,102,.2)'],
-  ['linear-gradient(135deg,#0a0a2d,#12125c)','#ccccff','#6666ff','rgba(102,102,255,.2)'],
-  ['linear-gradient(135deg,#002d2d,#005c5c)','#b3ffff','#00e5e5','rgba(0,229,229,.2)'],
-  ['linear-gradient(160deg,#18181f,#252530)','#e8e4f0','#FF6B00','rgba(255,107,0,.18)'],
-  ['linear-gradient(160deg,#1f1008,#3d2010)','#fde8cc','#ff9933','rgba(255,153,51,.2)'],
-  ['linear-gradient(160deg,#081f1f,#103d3d)','#ccfafa','#00d4d4','rgba(0,212,212,.2)'],
-  ['linear-gradient(160deg,#100818,#241038)','#e8ccff','#cc66ff','rgba(204,102,255,.2)'],
-  ['radial-gradient(ellipse at top left,#1a0a2e,#060608)','#e0d4ff','#9b59b6','rgba(155,89,182,.2)'],
-  ['radial-gradient(ellipse at bottom right,#0a2e1a,#060608)','#d4ffe0','#27ae60','rgba(39,174,96,.2)'],
-  ['radial-gradient(ellipse at top right,#2e1a0a,#060608)','#ffe0d4','#e67e22','rgba(230,126,34,.2)'],
-  ['radial-gradient(ellipse at center,#0a1a2e,#060608)','#d4e8ff','#2980b9','rgba(41,128,185,.2)'],
-  ['#101018','#f0eee8','#FF6B00','rgba(255,107,0,.2)'],
-  ['#0a1628','#c8e0ff','#4da6ff','rgba(77,166,255,.2)'],
-  ['linear-gradient(135deg,#1a0022,#38004a)','#f0ccff','#dd66ff','rgba(221,102,255,.2)'],
-  ['linear-gradient(135deg,#00100a,#00281a)','#ccffe8','#00e87a','rgba(0,232,122,.2)'],
+/* ════════════════════════════════════════════════════════
+   MODULE 2: VALIDATION
+════════════════════════════════════════════════════════ */
+const VALIDATORS = {
+  name:    v => v.length >= 2,
+  role:    v => v.length >= 2,
+  company: v => v.length >= 2,
+  phone:   v => /^[+\d\s\-()]{7,16}$/.test(v),
+  email:   v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+};
+const REQUIRED = ['name','role','company','phone','email'];
+const FIELD_IDS = { name:'f_name', role:'f_role', company:'f_company', phone:'f_phone', email:'f_email' };
+
+function validateField(key){
+  const val = getFieldVal(FIELD_IDS[key]);
+  const ok  = VALIDATORS[key](val);
+  const fg  = document.getElementById('fg_' + key);
+  const inp = document.getElementById(FIELD_IDS[key]);
+  if(!val){ fg.classList.remove('has-error'); inp.classList.remove('error','valid'); return null; }
+  fg.classList.toggle('has-error', !ok);
+  inp.classList.toggle('error', !ok);
+  inp.classList.toggle('valid', ok);
+  return ok;
+}
+
+function onFieldInput(key){
+  validateField(key);
+  syncUserData();
+  updateMiniPreview();
+  checkFormValidity();
+}
+
+function checkFormValidity(){
+  const allValid = REQUIRED.every(k => VALIDATORS[k](getFieldVal(FIELD_IDS[k])));
+  const btn = document.getElementById('seebtn');
+  const note = document.getElementById('buildNote');
+  btn.disabled = !allValid;
+  if(allValid){
+    note.textContent = '✨ Your form is complete — browse 30 stunning designs!';
+    note.style.color = 'var(--teal)';
+  } else {
+    note.textContent = '⚠ Fill in the required fields above to unlock your card gallery';
+    note.style.color = '';
+  }
+}
+
+function validateAll(){
+  let allOk = true;
+  REQUIRED.forEach(k => {
+    const ok = validateField(k);
+    if(!ok) allOk = false;
+  });
+  return allOk;
+}
+
+/* ════════════════════════════════════════════════════════
+   MODULE 3: MINI LIVE PREVIEW
+════════════════════════════════════════════════════════ */
+function updateMiniPreview(){
+  syncUserData();
+  const u = userData;
+  const mc = document.getElementById('miniCard');
+  mc.querySelector('.mini-card-name').textContent = u.name || 'Your Name';
+  mc.querySelector('.mini-card-role').textContent = u.role || 'Designation';
+  mc.querySelector('.mini-card-co').textContent   = u.company || 'Company / Institute';
+  const contacts = mc.querySelectorAll('.mini-card-contact');
+  contacts[0].textContent = '📞 ' + (u.phone || '+91 98765 43210');
+  contacts[1].textContent = '✉ '  + (u.email || 'your@email.com');
+}
+
+/* ════════════════════════════════════════════════════════
+   MODULE 4: FOCUS BUILDER (CTA)
+════════════════════════════════════════════════════════ */
+function focusBuilder(){
+  const el = document.getElementById('builder');
+  el.scrollIntoView({ behavior:'smooth' });
+  setTimeout(() => {
+    const inp = document.getElementById('f_name');
+    inp.focus();
+    // pulse animation
+    inp.style.transition = 'box-shadow .1s';
+    inp.style.boxShadow = '0 0 0 4px rgba(255,107,0,.3)';
+    setTimeout(() => { inp.style.boxShadow = ''; }, 900);
+  }, 600);
+}
+
+/* ════════════════════════════════════════════════════════
+   MODULE 5: PLAN TYPE SELECTOR (Card Types section)
+════════════════════════════════════════════════════════ */
+const PLAN_FEATURES = {
+  free:       { title:'Digital QR Card — Free',   sub:'What you get:',    chips:['Dynamic profile link','QR code','WhatsApp connect','1 document upload','Basic analytics'] },
+  pro:        { title:'Pro Digital Card — ₹99/mo', sub:'Power features:',  chips:['Unlimited doc vault','Lead capture CRM','Custom profile URL','Full analytics dashboard','Portfolio showcase','WhatsApp automation','🔥 All trending templates'] },
+  nfc:        { title:'NFC Elite Card — ₹398/mo', sub:'Everything in Pro plus:', chips:['Physical matte black NFC card','Tap-to-open on any phone','Delivered in 5–7 days','Engraving option','Replace info anytime — same card'] },
+  business:   { title:'Business Team — ₹499/mo',  sub:'Team power:',      chips:['10 team profiles','Brand-unified design','Central lead dashboard','Daily tap reports','Lead CSV export','WhatsApp auto follow-up','Admin panel'] },
+  student:    { title:'Student Card — Free',       sub:'Career tools:',    chips:['Resume builder profile','Certificate upload','GitHub & LinkedIn links','QR on printed resume','College-branded page'] },
+  freelancer: { title:'Freelancer Pro — ₹99/mo',  sub:'Client tools:',    chips:['Portfolio image gallery','Pricing PDF attach','Client inquiry form','Testimonials section','WhatsApp booking link','Analytics per project'] },
+};
+const HIGHLIGHT_PLANS = { pro:['Full analytics dashboard','Lead capture CRM','Custom profile URL','🔥 All trending templates'], business:['Central lead dashboard','Daily tap reports','Admin panel'] };
+
+function selectPlanType(plan){
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('active-plan'));
+  const card = document.querySelector(`.type-card[data-plan="${plan}"]`);
+  if(card) card.classList.add('active-plan');
+
+  const pf = PLAN_FEATURES[plan];
+  const panel = document.getElementById('planFeaturePanel');
+  document.getElementById('pfpTitle').textContent = pf.title;
+  document.getElementById('pfpSub').textContent   = pf.sub;
+  const chips = document.getElementById('pfpChips');
+  chips.innerHTML = '';
+  const highlights = HIGHLIGHT_PLANS[plan] || [];
+  pf.chips.forEach(feat => {
+    const d = document.createElement('div');
+    d.className = 'pfp-chip' + (highlights.includes(feat) ? ' highlight' : '');
+    d.innerHTML = `<span>${highlights.includes(feat)?'⚡':'✓'}</span>${feat}`;
+    chips.appendChild(d);
+  });
+  panel.classList.add('visible');
+  panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+/* ════════════════════════════════════════════════════════
+   MODULE 6: TEMPLATE DATASET (30 templates)
+════════════════════════════════════════════════════════ */
+const TEMPLATES = [
+  // TRENDING FREE
+  { id:1,  name:'Minimal Dark',      category:'free',    trending:true,  isNew:false, popularity:98, tags:['dark','minimal','clean'],
+    style:{ bg:'linear-gradient(135deg,#0a0a14,#12122a)', tc:'#f0eee8', ac:'#FF6B00', ab:'rgba(255,107,0,.22)', layout:'minimal',    pat:0 }},
+  { id:2,  name:'Saffron Fire',      category:'premium', trending:true,  isNew:false, popularity:95, tags:['orange','bold','warm'],
+    style:{ bg:'linear-gradient(135deg,#FF6B00,#c94d00)', tc:'#ffffff', ac:'#fff0cc', ab:'rgba(255,255,255,.22)', layout:'standard',   pat:2 }},
+  { id:3,  name:'Teal Professional', category:'free',    trending:true,  isNew:false, popularity:92, tags:['teal','professional'],
+    style:{ bg:'linear-gradient(135deg,#00796B,#004D40)', tc:'#ffffff', ac:'#a7ffeb', ab:'rgba(255,255,255,.18)', layout:'wide-avatar',pat:3 }},
+  { id:4,  name:'Gold Executive',    category:'premium', trending:true,  isNew:false, popularity:91, tags:['gold','executive','luxury'],
+    style:{ bg:'linear-gradient(135deg,#1a1200,#3d2c00)', tc:'#D4A017', ac:'#ff9800', ab:'rgba(212,160,23,.22)', layout:'bold-name',  pat:4 }},
+  { id:5,  name:'Midnight Purple',   category:'free',    trending:true,  isNew:false, popularity:89, tags:['purple','dark','night'],
+    style:{ bg:'linear-gradient(135deg,#0D0D1A,#1a0a2e)', tc:'#e0d4ff', ac:'#b39ddb', ab:'rgba(179,157,219,.2)', layout:'centered',   pat:6 }},
+  { id:6,  name:'Rose Elite',        category:'premium', trending:true,  isNew:true,  popularity:88, tags:['rose','feminine','pink'],
+    style:{ bg:'linear-gradient(135deg,#1a0810,#3d0d24)', tc:'#ffb3c8', ac:'#ff6b9d', ab:'rgba(255,107,157,.2)', layout:'split',      pat:7 }},
+  { id:7,  name:'Ocean Blue',        category:'free',    trending:true,  isNew:false, popularity:87, tags:['blue','ocean','cool'],
+    style:{ bg:'linear-gradient(135deg,#001a33,#003366)', tc:'#b3d9ff', ac:'#66b3ff', ab:'rgba(102,179,255,.2)', layout:'pill-contacts',pat:0 }},
+  { id:8,  name:'Forest Green',      category:'free',    trending:false, isNew:false, popularity:85, tags:['green','nature','fresh'],
+    style:{ bg:'linear-gradient(135deg,#0a1a0a,#0d3d0d)', tc:'#b3ffb3', ac:'#66ff66', ab:'rgba(102,255,102,.2)', layout:'icon-row',   pat:1 }},
+  { id:9,  name:'Platinum Pro',      category:'premium', trending:true,  isNew:false, popularity:84, tags:['grey','minimal','platinum'],
+    style:{ bg:'linear-gradient(135deg,#181818,#303030)', tc:'#ffffff', ac:'#cccccc', ab:'rgba(255,255,255,.14)', layout:'sidebar',    pat:8 }},
+  { id:10, name:'Crimson Power',     category:'premium', trending:false, isNew:false, popularity:82, tags:['red','bold','power'],
+    style:{ bg:'linear-gradient(135deg,#2d0a0a,#5c1212)', tc:'#ffcccc', ac:'#ff6666', ab:'rgba(255,102,102,.2)', layout:'compact',    pat:9 }},
+  // FREE
+  { id:11, name:'Royal Indigo',      category:'free',    trending:false, isNew:true,  popularity:81, tags:['indigo','royal','blue'],
+    style:{ bg:'linear-gradient(135deg,#0a0a2d,#12125c)', tc:'#ccccff', ac:'#6666ff', ab:'rgba(102,102,255,.2)', layout:'minimal',    pat:5 }},
+  { id:12, name:'Aqua Breeze',       category:'free',    trending:false, isNew:false, popularity:79, tags:['aqua','fresh','teal'],
+    style:{ bg:'linear-gradient(135deg,#002d2d,#005c5c)', tc:'#b3ffff', ac:'#00e5e5', ab:'rgba(0,229,229,.2)', layout:'standard',     pat:3 }},
+  { id:13, name:'Deep Slate',        category:'free',    trending:false, isNew:false, popularity:78, tags:['slate','dark','clean'],
+    style:{ bg:'linear-gradient(160deg,#18181f,#252530)', tc:'#e8e4f0', ac:'#FF6B00', ab:'rgba(255,107,0,.18)', layout:'wide-avatar', pat:6 }},
+  { id:14, name:'Warm Amber',        category:'free',    trending:false, isNew:false, popularity:77, tags:['amber','warm','earthy'],
+    style:{ bg:'linear-gradient(160deg,#1f1008,#3d2010)', tc:'#fde8cc', ac:'#ff9933', ab:'rgba(255,153,51,.2)', layout:'bold-name',   pat:2 }},
+  { id:15, name:'Neon Teal',         category:'premium', trending:false, isNew:true,  popularity:76, tags:['neon','teal','futuristic'],
+    style:{ bg:'linear-gradient(160deg,#081f1f,#103d3d)', tc:'#ccfafa', ac:'#00d4d4', ab:'rgba(0,212,212,.2)', layout:'centered',     pat:7 }},
+  { id:16, name:'Violet Dream',      category:'premium', trending:false, isNew:false, popularity:75, tags:['violet','dream','purple'],
+    style:{ bg:'linear-gradient(160deg,#100818,#241038)', tc:'#e8ccff', ac:'#cc66ff', ab:'rgba(204,102,255,.2)', layout:'split',      pat:0 }},
+  { id:17, name:'Cosmic Dark',       category:'free',    trending:false, isNew:false, popularity:74, tags:['cosmic','dark','space'],
+    style:{ bg:'radial-gradient(ellipse at top left,#1a0a2e,#060608)', tc:'#e0d4ff', ac:'#9b59b6', ab:'rgba(155,89,182,.2)', layout:'pill-contacts',pat:6 }},
+  { id:18, name:'Emerald Garden',    category:'free',    trending:false, isNew:false, popularity:72, tags:['emerald','green','garden'],
+    style:{ bg:'radial-gradient(ellipse at bottom right,#0a2e1a,#060608)', tc:'#d4ffe0', ac:'#27ae60', ab:'rgba(39,174,96,.2)', layout:'icon-row',pat:3 }},
+  { id:19, name:'Sunset Orange',     category:'premium', trending:false, isNew:false, popularity:71, tags:['sunset','orange','warm'],
+    style:{ bg:'radial-gradient(ellipse at top right,#2e1a0a,#060608)', tc:'#ffe0d4', ac:'#e67e22', ab:'rgba(230,126,34,.2)', layout:'sidebar',  pat:4 }},
+  { id:20, name:'Ocean Depth',       category:'free',    trending:false, isNew:false, popularity:70, tags:['ocean','depth','blue'],
+    style:{ bg:'radial-gradient(ellipse at center,#0a1a2e,#060608)', tc:'#d4e8ff', ac:'#2980b9', ab:'rgba(41,128,185,.2)', layout:'compact',    pat:1 }},
+  { id:21, name:'Pure Black',        category:'free',    trending:false, isNew:false, popularity:68, tags:['black','pure','minimal'],
+    style:{ bg:'#101018', tc:'#f0eee8', ac:'#FF6B00', ab:'rgba(255,107,0,.2)', layout:'minimal',    pat:8 }},
+  { id:22, name:'Steel Blue',        category:'free',    trending:false, isNew:false, popularity:67, tags:['steel','blue','corporate'],
+    style:{ bg:'#0a1628', tc:'#c8e0ff', ac:'#4da6ff', ab:'rgba(77,166,255,.2)', layout:'standard',  pat:5 }},
+  { id:23, name:'Grape Night',       category:'premium', trending:false, isNew:false, popularity:66, tags:['grape','night','purple'],
+    style:{ bg:'linear-gradient(135deg,#1a0022,#38004a)', tc:'#f0ccff', ac:'#dd66ff', ab:'rgba(221,102,255,.2)', layout:'wide-avatar',pat:7 }},
+  { id:24, name:'Jungle Fresh',      category:'free',    trending:false, isNew:false, popularity:65, tags:['jungle','fresh','green'],
+    style:{ bg:'linear-gradient(135deg,#00100a,#00281a)', tc:'#ccffe8', ac:'#00e87a', ab:'rgba(0,232,122,.2)', layout:'bold-name',   pat:9 }},
+  { id:25, name:'Bronze Classic',    category:'premium', trending:false, isNew:false, popularity:64, tags:['bronze','classic','warm'],
+    style:{ bg:'linear-gradient(135deg,#1a0d00,#3d2200)', tc:'#ffd9a0', ac:'#cd7f32', ab:'rgba(205,127,50,.2)', layout:'centered',   pat:2 }},
+  { id:26, name:'Arctic White',      category:'free',    trending:false, isNew:true,  popularity:63, tags:['white','arctic','light'],
+    style:{ bg:'linear-gradient(135deg,#e8e8f0,#d0d0e0)', tc:'#1a1a2e', ac:'#FF6B00', ab:'rgba(255,107,0,.15)', layout:'split',     pat:0 }},
+  { id:27, name:'Cyber Green',       category:'premium', trending:false, isNew:true,  popularity:62, tags:['cyber','green','neon'],
+    style:{ bg:'linear-gradient(135deg,#001a00,#003300)', tc:'#00ff88', ac:'#00cc66', ab:'rgba(0,255,136,.15)', layout:'pill-contacts',pat:3 }},
+  { id:28, name:'Lava Red',          category:'premium', trending:false, isNew:false, popularity:60, tags:['lava','red','bold'],
+    style:{ bg:'linear-gradient(135deg,#1a0000,#400000)', tc:'#ffdddd', ac:'#ff3333', ab:'rgba(255,51,51,.2)', layout:'icon-row',    pat:6 }},
+  { id:29, name:'Silver Cloud',      category:'free',    trending:false, isNew:false, popularity:58, tags:['silver','cloud','clean'],
+    style:{ bg:'linear-gradient(135deg,#0f0f18,#1e1e2e)', tc:'#c8c8e8', ac:'#8888cc', ab:'rgba(136,136,204,.2)', layout:'sidebar',  pat:1 }},
+  { id:30, name:'Neon Pink',         category:'premium', trending:false, isNew:true,  popularity:55, tags:['neon','pink','vibrant'],
+    style:{ bg:'linear-gradient(135deg,#1a0018,#3a003a)', tc:'#ffccff', ac:'#ff44cc', ab:'rgba(255,68,204,.2)', layout:'compact',   pat:4 }},
 ];
 
-const LAYOUTS=['standard','compact','wide-avatar','minimal','bold-name','centered','split','pill-contacts','icon-row','sidebar'];
-
-const PATTERNS=[
+const PATTERNS = [
   `<circle cx="280" cy="20" r="90" fill="white" opacity=".06"/><circle cx="20" cy="180" r="70" fill="white" opacity=".04"/>`,
   `<line x1="0" y1="0" x2="400" y2="200" stroke="white" stroke-width="40" opacity=".035"/><line x1="0" y1="60" x2="340" y2="200" stroke="white" stroke-width="25" opacity=".025"/>`,
   `<polygon points="340,0 400,0 400,110" fill="white" opacity=".05"/>`,
@@ -610,631 +1195,47 @@ const PATTERNS=[
   ``,
   `<line x1="0" y1="200" x2="400" y2="0" stroke="white" stroke-width="1" opacity=".06"/><line x1="400" y1="200" x2="0" y2="0" stroke="white" stroke-width="1" opacity=".04"/>`,
 ];
+const LAYOUTS = ['standard','compact','wide-avatar','minimal','bold-name','centered','split','pill-contacts','icon-row','sidebar'];
+const QR_SVG = `<svg viewBox="0 0 40 40" fill="currentColor" width="28" height="28"><rect x="2" y="2" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6" y="6" width="6" height="6"/><rect x="24" y="2" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"/><rect x="28" y="6" width="6" height="6"/><rect x="2" y="24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6" y="28" width="6" height="6"/><rect x="24" y="24" width="4" height="4"/><rect x="32" y="24" width="6" height="4"/><rect x="24" y="32" width="6" height="6"/><rect x="34" y="32" width="4" height="6"/></svg>`;
+const NFC_HTML = `<div style="position:absolute;top:10px;right:10px;width:26px;height:20px;border-radius:3px;border:1px solid rgba(255,255,255,.2);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:3px;opacity:.35;pointer-events:none;"><div style="background:rgba(255,255,255,.5);border-radius:1px;"></div><div style="background:rgba(255,255,255,.5);border-radius:1px;"></div><div style="background:rgba(255,255,255,.5);border-radius:1px;"></div><div style="background:rgba(255,255,255,.5);border-radius:1px;"></div></div>`;
+const PH = `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>`;
+const EM = `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
+const WE = `<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96z"/></svg>`;
 
-const QR_SVG=`<svg viewBox="0 0 40 40" fill="currentColor" width="30" height="30"><rect x="2" y="2" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6" y="6" width="6" height="6"/><rect x="24" y="2" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"/><rect x="28" y="6" width="6" height="6"/><rect x="2" y="24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"/><rect x="6" y="28" width="6" height="6"/><rect x="24" y="24" width="4" height="4"/><rect x="32" y="24" width="6" height="4"/><rect x="24" y="32" width="6" height="6"/><rect x="34" y="32" width="4" height="6"/></svg>`;
-
-const NFC=`<div style="position:absolute;top:10px;right:10px;width:26px;height:20px;border-radius:3px;border:1px solid rgba(255,255,255,.2);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;padding:3px;opacity:.35;"><div style="background:rgba(255,255,255,.5);border-radius:1px;"></div><div style="background:rgba(255,255,255,.5);border-radius:1px;"></div><div style="background:rgba(255,255,255,.5);border-radius:1px;"></div><div style="background:rgba(255,255,255,.5);border-radius:1px;"></div></div>`;
-
-// icon SVGs
-const PH=`<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>`;
-const EM=`<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>`;
-const WE=`<svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2 0 .68.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2 0-.68.07-1.35.16-2h4.68c.09.65.16 1.32.16 2 0 .68-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2 0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>`;
-
-function wa_btn(col,wa){
+/* ════════════════════════════════════════════════════════
+   MODULE 7: RENDER CARD HTML
+════════════════════════════════════════════════════════ */
+function avH(sz, br, bg, extra='', u=userData){
+  const img = userPhoto
+    ? `<img src="${userPhoto}" style="width:100%;height:100%;object-fit:cover;border-radius:${br};"/>`
+    : `<span style="font-size:${parseInt(sz)*.42}px;">👤</span>`;
+  return `<div style="width:${sz};height:${sz};border-radius:${br};background:${bg};border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;${extra}">${img}</div>`;
+}
+function waBtn(tc, wa){
   if(!wa) return '';
   return `<div style="display:inline-flex;align-items:center;gap:4px;background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.28);border-radius:100px;padding:4px 10px;font-size:9px;font-weight:600;color:#25D366;">WhatsApp</div>`;
 }
 
-function avatar_html(sz,br,bg,extra_style){
-  const img= userPhoto?`<img src="${userPhoto}" style="width:100%;height:100%;object-fit:cover;border-radius:${br};" />` :`<span style="font-size:${parseInt(sz)*0.42}px;">👤</span>`;
-  return `<div style="width:${sz};height:${sz};border-radius:${br};background:${bg};border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;${extra_style||''}">${img}</div>`;
-}
-
-function buildCard(pIdx,lIdx,u){
-  const [bg,tc,ac,ab]=PALETTES[pIdx];
-  const lo=LAYOUTS[lIdx];
-  const pat=PATTERNS[(pIdx+lIdx)%PATTERNS.length];
-  const nm_sz= lo==='compact'?'13px': lo==='bold-name'?'19px': lo==='minimal'?'17px':'15px';
-  const av_sz= lo==='compact'?'36px': lo==='wide-avatar'||lo==='bold-name'?'56px':'46px';
-  const br= lo==='pill-contacts'||lo==='wide-avatar'?'10px':'50%';
-
-  let inner='';
+function buildCardHTML(style, u, custom={}){
+  const s = Object.assign({}, {
+    bg: style.bg, tc: style.tc, ac: style.ac, ab: style.ab,
+    layout: style.layout, pat: style.pat,
+    font:"'Syne',sans-serif", nameSize:15, bodySize:11,
+    radius:14, shadow:true, border:false, borderColor:'#FF6B00'
+  }, custom);
+  const pat = PATTERNS[s.pat] || '';
+  const lo  = s.layout;
+  const nm  = `font-family:${s.font};font-weight:700;font-size:${s.nameSize}px;color:${s.tc};line-height:1.2;`;
+  const rm  = `font-size:10px;color:${s.ac};font-weight:600;margin:2px 0;font-family:${s.font};`;
+  const cm  = `font-size:9px;opacity:.45;color:${s.tc};font-style:italic;font-family:${s.font};`;
+  const ct  = `font-size:${s.bodySize}px;color:${s.tc};opacity:.75;font-family:${s.font};`;
+  const avSz = lo==='compact'?'36px':lo==='wide-avatar'||lo==='bold-name'?'54px':'46px';
+  const avBr = lo==='pill-contacts'||lo==='wide-avatar'?'10px':'50%';
+  let inner = '';
 
   if(lo==='centered'){
-    inner=`
-      <div style="text-align:center;position:relative;z-index:2;">
-        ${avatar_html(av_sz,'50%',ab,'display:inline-flex;margin-bottom:10px;')}
-        <div style="font-weight:700;font-size:${nm_sz};color:${tc};line-height:1.2;">${u.name}</div>
-        <div style="font-size:10px;color:${ac};font-weight:600;margin:2px 0;">${u.role}</div>
-        <div style="font-size:9px;opacity:.45;color:${tc};">${u.co}</div>
-        <div style="height:1px;background:rgba(255,255,255,.1);margin:10px 0;"></div>
-        <div style="font-size:10px;opacity:.75;color:${tc};margin-bottom:3px;">${u.phone}</div>
-        <div style="font-size:9px;opacity:.6;color:${tc};">${u.email}</div>
-        <div style="margin-top:10px;display:flex;justify-content:center;gap:10px;align-items:center;">
-          <span style="font-size:7px;opacity:.3;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>
-          ${wa_btn(tc,u.wa)}
-        </div>
-      </div>`;
+    inner=`<div style="text-align:center;position:relative;z-index:2;">${avH(avSz,'50%',s.ab,'display:inline-flex;margin-bottom:8px;')}<div style="${nm}">${u.name||'Your Name'}</div><div style="${rm}">${u.role||'Designation'}</div><div style="${cm}">${u.company||'Company'}</div><div style="height:1px;background:rgba(255,255,255,.1);margin:8px 0;"></div><div style="${ct}">${u.phone||'+91 98765 43210'}</div><div style="font-size:9px;color:${s.tc};opacity:.6;font-family:${s.font};">${u.email||'email@example.com'}</div><div style="margin-top:8px;display:flex;justify-content:center;gap:8px;align-items:center;"><span style="font-size:7px;opacity:.3;font-weight:700;letter-spacing:2px;color:${s.tc};">MEECARDS.IN</span>${waBtn(s.tc,u.whatsapp)}</div></div>`;
   } else if(lo==='minimal'){
-    inner=`
-      <div style="position:relative;z-index:2;">
-        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:${nm_sz};color:${tc};letter-spacing:-.5px;">${u.name}</div>
-        <div style="font-size:10px;color:${ac};font-weight:600;margin:2px 0;">${u.role}</div>
-        <div style="font-size:9px;opacity:.4;color:${tc};margin-bottom:14px;">${u.co}</div>
-        <div style="height:1px;background:rgba(255,255,255,.08);margin-bottom:12px;"></div>
-        <div style="font-size:11px;color:${tc};opacity:.75;margin-bottom:4px;">${u.phone}</div>
-        <div style="font-size:10px;color:${tc};opacity:.58;margin-bottom:4px;">${u.email}</div>
-        <div style="font-size:10px;color:${tc};opacity:.45;">${u.web}</div>
-        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-size:7px;opacity:.3;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>
-          ${u.wa?`<span style="font-size:9px;color:#25D366;font-weight:600;">● WhatsApp</span>`:''}
-        </div>
-      </div>`;
+    inner=`<div style="position:relative;z-index:2;"><div style="${nm}">${u.name||'Your Name'}</div><div style="${rm}">${u.role||'Designation'}</div><div style="${cm};margin-bottom:12px;">${u.company||'Company'}</div><div style="height:1px;background:rgba(255,255,255,.08);margin-bottom:10px;"></div><div style="${ct};margin-bottom:3px;">${u.phone||'+91 98765 43210'}</div><div style="font-size:9px;color:${s.tc};opacity:.6;font-family:${s.font};margin-bottom:3px;">${u.email||'email@example.com'}</div><div style="font-size:9px;color:${s.tc};opacity:.45;font-family:${s.font};">${u.website||'meecards.in/you'}</div><div style="margin-top:10px;display:flex;justify-content:space-between;"><span style="font-size:7px;opacity:.3;font-weight:700;letter-spacing:2px;color:${s.tc};">MEECARDS.IN</span>${u.whatsapp?`<span style="font-size:9px;color:#25D366;font-weight:600;">● WA</span>`:''}</div></div>`;
   } else if(lo==='bold-name'){
-    inner=`
-      <div style="position:relative;z-index:2;">
-        <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;">
-          ${avatar_html(av_sz,'12px',ab,'')}
-          <div>
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:${nm_sz};color:${tc};letter-spacing:-.5px;line-height:1.1;">${u.name}</div>
-            <div style="font-size:10px;color:${ac};font-weight:600;margin-top:2px;">${u.role}</div>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,.07);border-radius:10px;padding:9px 12px;margin-bottom:10px;">
-          <div style="font-size:11px;color:${tc};opacity:.75;margin-bottom:4px;">${u.phone}</div>
-          <div style="font-size:10px;color:${tc};opacity:.6;">${u.email}</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-size:7px;opacity:.28;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>
-          ${wa_btn(tc,u.wa)}
-        </div>
-      </div>`;
-  } else if(lo==='split'){
-    inner=`
-      <div style="position:relative;z-index:2;display:flex;gap:12px;">
-        <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px;border-right:1px solid rgba(255,255,255,.08);padding-right:12px;width:62px;">
-          ${avatar_html('44px','50%',ab,'')}
-          <div style="color:${tc};opacity:.65;">${QR_SVG}</div>
-          <span style="font-size:6px;opacity:.28;font-weight:700;letter-spacing:1px;color:${tc};text-align:center;">TAPID</span>
-        </div>
-        <div style="flex:1;">
-          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:${nm_sz};color:${tc};letter-spacing:-.4px;margin-bottom:2px;">${u.name}</div>
-          <div style="font-size:10px;color:${ac};font-weight:600;margin-bottom:1px;">${u.role}</div>
-          <div style="font-size:9px;opacity:.42;color:${tc};margin-bottom:10px;">${u.co}</div>
-          <div style="display:flex;flex-direction:column;gap:5px;">
-            <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:${tc};opacity:.75;">${PH}${u.phone}</div>
-            <div style="display:flex;align-items:center;gap:5px;font-size:9px;color:${tc};opacity:.62;">${EM}${u.email}</div>
-            <div style="display:flex;align-items:center;gap:5px;font-size:9px;color:${tc};opacity:.5;">${WE}${u.web}</div>
-          </div>
-          <div style="margin-top:9px;">${wa_btn(tc,u.wa)}</div>
-        </div>
-      </div>`;
-  } else if(lo==='pill-contacts'){
-    inner=`
-      <div style="position:relative;z-index:2;">
-        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;">
-          ${avatar_html(av_sz,br,ab,'')}
-          <div>
-            <div style="font-weight:700;font-size:${nm_sz};color:${tc};line-height:1.2;">${u.name}</div>
-            <div style="font-size:9px;opacity:.6;color:${tc};margin-top:1px;">${u.role} · ${u.co}</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
-          <div style="background:rgba(255,255,255,.08);border-radius:100px;padding:4px 10px;font-size:10px;color:${tc};opacity:.8;">${u.phone}</div>
-          <div style="background:rgba(255,255,255,.08);border-radius:100px;padding:4px 10px;font-size:9px;color:${tc};opacity:.7;">${u.email}</div>
-          ${u.wa?`<div style="background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.25);border-radius:100px;padding:4px 10px;font-size:9px;color:#25D366;">WhatsApp</div>`:''}
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="opacity:.25;font-size:7px;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>
-          <div style="color:${tc};opacity:.65;">${QR_SVG}</div>
-        </div>
-      </div>`;
-  } else if(lo==='icon-row'){
-    inner=`
-      <div style="position:relative;z-index:2;">
-        <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;">
-          ${avatar_html(av_sz,'50%',ab,'')}
-          <div>
-            <div style="font-weight:700;font-size:${nm_sz};color:${tc};line-height:1.2;">${u.name}</div>
-            <div style="font-size:10px;color:${ac};font-weight:600;margin:2px 0;">${u.role}</div>
-            <div style="font-size:9px;opacity:.42;color:${tc};font-style:italic;">${u.co}</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:7px;margin-bottom:10px;">
-          <div style="flex:1;background:rgba(255,255,255,.07);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:13px;margin-bottom:2px;">📞</div><div style="font-size:8px;color:${tc};opacity:.65;">${u.phone}</div></div>
-          <div style="flex:1;background:rgba(255,255,255,.07);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:13px;margin-bottom:2px;">✉️</div><div style="font-size:8px;color:${tc};opacity:.6;word-break:break-all;">${u.email}</div></div>
-          ${u.wa?`<div style="flex:1;background:rgba(37,211,102,.1);border-radius:8px;padding:8px;text-align:center;"><div style="font-size:13px;margin-bottom:2px;">💬</div><div style="font-size:8px;color:#25D366;">WhatsApp</div></div>`:''}
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="opacity:.25;font-size:7px;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>
-          <div style="color:${tc};opacity:.65;">${QR_SVG}</div>
-        </div>
-      </div>`;
-  } else if(lo==='sidebar'){
-    inner=`
-      <div style="position:relative;z-index:2;display:grid;grid-template-columns:4px 1fr;gap:0;">
-        <div style="background:${ac};border-radius:2px;margin-right:14px;"></div>
-        <div>
-          <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;">
-            ${avatar_html('42px','50%',ab,'')}
-            <div>
-              <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:${nm_sz};color:${tc};line-height:1.2;">${u.name}</div>
-              <div style="font-size:10px;opacity:.6;color:${tc};">${u.role}</div>
-            </div>
-          </div>
-          <div style="font-size:9px;opacity:.4;color:${tc};font-style:italic;margin-bottom:8px;">${u.co}</div>
-          <div style="display:flex;flex-direction:column;gap:4px;">
-            <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:${tc};opacity:.72;">${PH}${u.phone}</div>
-            <div style="display:flex;align-items:center;gap:5px;font-size:9px;color:${tc};opacity:.6;">${EM}${u.email}</div>
-          </div>
-          <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center;">
-            <span style="opacity:.28;font-size:7px;font-weight:700;letter-spacing:2px;color:${tc};">TAPID.IN</span>
-            ${u.wa?`<span style="font-size:9px;color:#25D366;font-weight:600;">●WhatsApp</span>`:''}
-          </div>
-        </div>
-      </div>`;
-  } else if(lo==='wide-avatar'){
-    inner=`
-      <div style="position:relative;z-index:2;">
-        <div style="display:flex;gap:14px;align-items:center;margin-bottom:12px;">
-          ${avatar_html('58px','14px',ab,'')}
-          <div style="flex:1;">
-            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:${nm_sz};color:${tc};line-height:1.1;">${u.name}</div>
-            <div style="font-size:10px;color:${ac};font-weight:600;margin:2px 0;">${u.role}</div>
-            <div style="font-size:9px;opacity:.42;color:${tc};">${u.co}</div>
-          </div>
-        </div>
-        <div style="height:1px;background:rgba(255,255,255,.08);margin-bottom:10px;"></div>
-        <div style="display:flex;justify-content:space-between;align-items:flex-end;">
-          <div>
-            <div style="font-size:11px;color:${tc};opacity:.75;margin-bottom:4px;">${u.phone}</div>
-            <div style="font-size:10px;color:${tc};opacity:.6;margin-bottom:5px;">${u.email}</div>
-            ${wa_btn(tc,u.wa)}
-          </div>
-          <div style="text-align:right;">
-            <div style="color:${tc};opacity:.65;">${QR_SVG}</div>
-            <div style="font-size:7px;opacity:.25;font-weight:700;letter-spacing:2px;color:${tc};margin-top:3px;">TAPID.IN</div>
-          </div>
-        </div>
-      </div>`;
-  } else if(lo==='compact'){
-    inner=`
-      <div style="position:relative;z-index:2;">
-        <div style="display:flex;gap:8px;align-items:center;margin-bottom:9px;">
-          ${avatar_html('34px','50%',ab,'')}
-          <div>
-            <div style="font-weight:700;font-size:${nm_sz};color:${tc};line-height:1.2;">${u.name}</div>
-            <div style="font-size:9px;opacity:.62;color:${tc};">${u.role} · ${u.co}</div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:9px;">
-          <div style="display:flex;gap:5px;align-items:center;font-size:10px;color:${tc};opacity:.75;">${PH}${u.phone}</div>
-          <div style="display:flex;gap:5px;align-items:center;font-size:9px;color:${tc};opacity:.62;">${EM}${u.email}</div>
-          <div style="display:flex;gap:5px;align-items:center;font-size:9px;color:${tc};opacity:.5;">${WE}${u.web}</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <span style="opacity:.25;font-size:7px;font-weight:700;letter-spacing:1px;color:${tc};">TAPID.IN</span>
-          <div style="display:flex;align-items:center;gap:8px;">
-            ${u.wa?`<span style="font-size:9px;color:#25D366;font-weight:600;">WhatsApp</span>`:''}
-            <div style="color:${tc};opacity:.6;">${QR_SVG}</div>
-          </div>
-        </div>
-      </div>`;
-  } else {
-    // standard
-    inner=`
-      <div style="position:relative;z-index:2;">
-        <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:13px;">
-          ${avatar_html(av_sz,'50%',ab,'')}
-          <div>
-            <div style="font-weight:700;font-size:${nm_sz};color:${tc};line-height:1.2;">${u.name}</div>
-            <div style="font-size:10px;opacity:.65;color:${tc};margin:2px 0;">${u.role}</div>
-            <div style="font-size:9px;opacity:.42;color:${tc};font-style:italic;">${u.co}</div>
-          </div>
-        </div>
-        <div style="height:1px;background:rgba(255,255,255,.09);margin-bottom:11px;"></div>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:11px;">
-          <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:${tc};opacity:.75;">${PH}${u.phone}</div>
-          <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:${tc};opacity:.65;">${EM}${u.email}</div>
-          <div style="display:flex;align-items:center;gap:6px;font-size:10px;color:${tc};opacity:.52;">${WE}${u.web}</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="color:${tc};opacity:.65;">${QR_SVG}</div>
-            <div style="font-size:7px;opacity:.25;font-weight:700;letter-spacing:2px;color:${tc};margin-top:3px;">TAPID.IN</div>
-          </div>
-          ${wa_btn(tc,u.wa)}
-        </div>
-      </div>`;
-  }
-
-  return {bg,inner,pat};
-}
-
-// ─── GALLERY ───
-function openGallery(){
-  const u=getUD();
-  const grid=document.getElementById('ggrid');
-  grid.innerHTML='';
-  selectedIdx=-1;
-  document.getElementById('gproceedBtn').disabled=true;
-  document.getElementById('gselInfo').innerHTML='👆 Click any card to select your favourite design';
-
-  // Build all 240 — 24 palettes × 10 layouts
-  const frag=document.createDocumentFragment();
-  let n=0;
-  for(let p=0;p<PALETTES.length && n<240;p++){
-    for(let l=0;l<LAYOUTS.length && n<240;l++){
-      const {bg,inner,pat}=buildCard(p,l,u);
-      const div=document.createElement('div');
-      div.className='gcard';
-      div.id='gc'+n;
-      div.dataset.idx=n;
-      div.style.background=bg;
-      div.style.boxShadow='0 8px 28px rgba(0,0,0,.55)';
-      div.innerHTML=`
-        <div class="chosen-badge">✓ Selected</div>
-        <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">${pat}</svg>
-        ${NFC}
-        ${inner}`;
-      div.onclick=()=>selectCard(n);
-      frag.appendChild(div);
-      n++;
-    }
-  }
-  grid.appendChild(frag);
-
-  document.getElementById('galleryOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-function closeGallery(){
-  document.getElementById('galleryOverlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-
-function selectCard(idx){
-  document.querySelectorAll('.gcard').forEach(c=>c.classList.remove('chosen'));
-  const el=document.getElementById('gc'+idx);
-  if(el) el.classList.add('chosen');
-  selectedIdx=idx;
-  document.getElementById('gproceedBtn').disabled=false;
-  document.getElementById('gselInfo').innerHTML=`<em>Design #${idx+1}</em> selected — click the button to get your card!`;
-}
-
-// ─── PAYMENT ───
-let selPlan='pro';
-function openPaymentModal(){
-  closeGallery();
-  document.getElementById('downloadProgress').style.display='none';
-  document.getElementById('progFill').style.width='0%';
-  const btn=document.getElementById('payBtn');
-  btn.disabled=false;
-  btn.textContent='Pay ₹99 with Razorpay / UPI →';
-  // reset to pro selected
-  selPlan='pro';
-  document.querySelectorAll('.plan-card').forEach(c=>{
-    c.classList.remove('selected');
-    c.querySelector('.plan-radio').style.background='';
-    c.querySelector('.plan-radio').style.borderColor='';
-  });
-  const proCard=document.querySelectorAll('.plan-card')[1];
-  if(proCard){
-    proCard.classList.add('selected');
-    proCard.querySelector('.plan-radio').style.background='var(--saffron)';
-    proCard.querySelector('.plan-radio').style.borderColor='var(--saffron)';
-  }
-  document.getElementById('paymentModal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closePaymentModal(){
-  document.getElementById('paymentModal').classList.remove('open');
-  document.body.style.overflow='';
-}
-function selectPlan(el,plan){
-  selPlan=plan;
-  document.querySelectorAll('.plan-card').forEach(c=>{
-    c.classList.remove('selected');
-    c.querySelector('.plan-radio').style.background='';
-    c.querySelector('.plan-radio').style.borderColor='';
-  });
-  el.classList.add('selected');
-  el.querySelector('.plan-radio').style.background='var(--saffron)';
-  el.querySelector('.plan-radio').style.borderColor='var(--saffron)';
-  const btn=document.getElementById('payBtn');
-  if(plan==='free') btn.textContent='Download My Card — Free →';
-  else if(plan==='pro') btn.textContent='Pay ₹99 with Razorpay / UPI →';
-  else btn.textContent='Pay ₹398 with Razorpay / UPI →';
-}
-
-// ─── REAL CARD DOWNLOAD via Canvas ───
-function handlePayment(){
-  if(selPlan==='free'){
-    downloadCard();
-  } else {
-    // Razorpay placeholder — replace with real SDK call
-    alert('🔗 Redirecting to Razorpay...\n\nIntegrate Razorpay SDK here.\nAfter payment success → call downloadCard()');
-  }
-}
-
-function downloadCard(){
-  const btn=document.getElementById('payBtn');
-  btn.disabled=true;
-  btn.textContent='Generating card...';
-  const prog=document.getElementById('downloadProgress');
-  const fill=document.getElementById('progFill');
-  const msg=document.getElementById('downloadMsg');
-  prog.style.display='block';
-
-  // Animate progress bar
-  let pct=0;
-  const ticker=setInterval(()=>{
-    pct=Math.min(pct+Math.random()*18,90);
-    fill.style.width=pct+'%';
-  },120);
-
-  // Use html2canvas on the selected card element
-  const cardEl=document.getElementById('gc'+selectedIdx);
-  if(!cardEl){
-    clearInterval(ticker);
-    prog.style.display='none';
-    btn.disabled=false;
-    btn.textContent='Download My Card — Free →';
-    alert('Please select a card first from the gallery.');
-    return;
-  }
-
-  msg.textContent='Rendering your card...';
-
-  // Draw the card onto a canvas manually (no external lib needed)
-  renderCardToCanvas(cardEl, (dataUrl)=>{
-    clearInterval(ticker);
-    fill.style.width='100%';
-    msg.textContent='✅ Card ready! Downloading...';
-
-    setTimeout(()=>{
-      const a=document.createElement('a');
-      a.href=dataUrl;
-      const u=getUD();
-      a.download=`TapID_${u.name.replace(/\s+/g,'_')}.png`;
-      a.click();
-
-      setTimeout(()=>{
-        prog.style.display='none';
-        fill.style.width='0%';
-        btn.disabled=false;
-        btn.textContent='Download My Card — Free →';
-        closePaymentModal();
-      },1200);
-    },400);
-  });
-}
-
-function renderCardToCanvas(cardEl, callback){
-  const W=700, H=400;
-  const canvas=document.createElement('canvas');
-  canvas.width=W; canvas.height=H;
-  const ctx=canvas.getContext('2d');
-  const u=getUD();
-
-  // Get palette from selectedIdx
-  const pIdx=Math.floor(selectedIdx/LAYOUTS.length);
-  const [bg,tc,ac,ab]=PALETTES[pIdx%PALETTES.length];
-
-  // --- Background ---
-  if(bg.startsWith('linear-gradient')||bg.startsWith('radial-gradient')){
-    // Parse gradient stops for canvas
-    const stops=parseGradientStops(bg);
-    let grad;
-    if(bg.startsWith('radial')){
-      grad=ctx.createRadialGradient(W*0.3,H*0.3,0,W*0.5,H*0.5,W*0.7);
-    } else {
-      // linear — parse angle
-      const angle=parseGradientAngle(bg);
-      const rad=angle*Math.PI/180;
-      const x1=W/2-Math.cos(rad)*W/2, y1=H/2-Math.sin(rad)*H/2;
-      const x2=W/2+Math.cos(rad)*W/2, y2=H/2+Math.sin(rad)*H/2;
-      grad=ctx.createLinearGradient(x1,y1,x2,y2);
-    }
-    stops.forEach(s=>grad.addColorStop(s.pos,s.color));
-    ctx.fillStyle=grad;
-  } else {
-    ctx.fillStyle=bg;
-  }
-  ctx.roundRect(0,0,W,H,28);
-  ctx.fill();
-
-  // --- Subtle pattern overlay: circles ---
-  ctx.save();
-  ctx.globalAlpha=0.06;
-  ctx.fillStyle='#ffffff';
-  ctx.beginPath(); ctx.arc(W*0.82,H*0.15,110,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(W*0.08,H*0.82,80,0,Math.PI*2); ctx.fill();
-  ctx.restore();
-
-  // --- NFC chip (top right) ---
-  ctx.save();
-  ctx.globalAlpha=0.35;
-  ctx.strokeStyle='rgba(255,255,255,0.6)';
-  ctx.lineWidth=1.5;
-  ctx.roundRect(W-68,18,42,32,4);
-  ctx.stroke();
-  // inner segments
-  ctx.fillStyle='rgba(255,255,255,0.5)';
-  [[W-64,22,16,12],[W-44,22,16,12],[W-64,38,16,10],[W-44,38,16,10]].forEach(([x,y,w,h])=>{
-    ctx.fillRect(x,y,w,h);
-  });
-  ctx.restore();
-
-  // --- Avatar ---
-  const avX=40, avY=40, avR=52;
-  ctx.save();
-  ctx.beginPath();
-  ctx.arc(avX+avR/2,avY+avR/2,avR/2,0,Math.PI*2);
-  ctx.fillStyle=ab;
-  ctx.fill();
-  ctx.strokeStyle='rgba(255,255,255,0.2)';
-  ctx.lineWidth=2;
-  ctx.stroke();
-  ctx.clip();
-  if(userPhoto){
-    try{
-      const img=new Image();
-      img.src=userPhoto;
-      ctx.drawImage(img,avX,avY,avR,avR);
-    } catch(e){ drawAvatarEmoji(ctx,avX,avY,avR); }
-  } else {
-    drawAvatarEmoji(ctx,avX,avY,avR);
-  }
-  ctx.restore();
-
-  // --- Name, Role, Company ---
-  const tx=avX+avR+20;
-  ctx.fillStyle=tc;
-  ctx.font=`700 ${W*0.048}px Syne, sans-serif`;
-  ctx.fillText(clip(u.name,22), tx, avY+22);
-  ctx.globalAlpha=0.7;
-  ctx.font=`500 ${W*0.028}px Instrument Sans, sans-serif`;
-  ctx.fillStyle=ac;
-  ctx.fillText(clip(u.role,26), tx, avY+44);
-  ctx.globalAlpha=0.45;
-  ctx.fillStyle=tc;
-  ctx.font=`italic ${W*0.024}px Instrument Sans, sans-serif`;
-  ctx.fillText(clip(u.co,30), tx, avY+62);
-  ctx.globalAlpha=1;
-
-  // --- Divider ---
-  const dy=avY+avR+24;
-  ctx.strokeStyle='rgba(255,255,255,0.1)';
-  ctx.lineWidth=1;
-  ctx.beginPath(); ctx.moveTo(40,dy); ctx.lineTo(W-40,dy); ctx.stroke();
-
-  // --- Contact rows ---
-  ctx.fillStyle=tc;
-  const rows=[
-    ['📞', u.phone],
-    ['✉', u.email],
-    ['🌐', u.web],
-  ];
-  if(u.wa) rows.push(['💬', 'WhatsApp: '+u.wa]);
-  rows.forEach(([icon,val],i)=>{
-    const ry=dy+28+i*34;
-    ctx.globalAlpha=0.75-i*0.08;
-    ctx.font=`${W*0.026}px Instrument Sans, sans-serif`;
-    ctx.fillText(icon+' '+clip(val,40), 44, ry);
-  });
-  ctx.globalAlpha=1;
-
-  // --- QR block (bottom right) ---
-  const qx=W-110, qy=H-110, qs=80;
-  ctx.save();
-  ctx.globalAlpha=0.18;
-  ctx.fillStyle='#ffffff';
-  ctx.roundRect(qx,qy,qs,qs,10);
-  ctx.fill();
-  ctx.restore();
-  // draw mini QR pattern
-  drawMiniQR(ctx,qx+8,qy+8,qs-16,tc);
-
-  // --- TAPID.IN brand ---
-  ctx.globalAlpha=0.3;
-  ctx.fillStyle=tc;
-  ctx.font=`700 ${W*0.018}px Syne, sans-serif`;
-  ctx.letterSpacing='3px';
-  ctx.fillText('TAPID.IN', W-108, H-14);
-  ctx.globalAlpha=1;
-
-  // --- WhatsApp pill (bottom left) ---
-  if(u.wa){
-    ctx.save();
-    ctx.fillStyle='rgba(37,211,102,0.15)';
-    ctx.strokeStyle='rgba(37,211,102,0.35)';
-    ctx.lineWidth=1;
-    ctx.roundRect(40,H-50,160,30,100);
-    ctx.fill(); ctx.stroke();
-    ctx.fillStyle='#25D366';
-    ctx.font=`600 ${W*0.022}px Instrument Sans, sans-serif`;
-    ctx.fillText('● WhatsApp', 60, H-30);
-    ctx.restore();
-  }
-
-  callback(canvas.toDataURL('image/png'));
-}
-
-function clip(str,max){ return str&&str.length>max?str.slice(0,max-1)+'…':str||''; }
-
-function drawAvatarEmoji(ctx,x,y,size){
-  ctx.font=`${size*0.55}px serif`;
-  ctx.textAlign='center';
-  ctx.textBaseline='middle';
-  ctx.globalAlpha=0.7;
-  ctx.fillStyle='rgba(255,255,255,0.8)';
-  ctx.fillText('👤',x+size/2,y+size/2);
-  ctx.textAlign='left';
-  ctx.textBaseline='alphabetic';
-  ctx.globalAlpha=1;
-}
-
-function drawMiniQR(ctx,x,y,size,color){
-  // Draw a simple static QR-like pattern
-  ctx.save();
-  ctx.fillStyle=color;
-  ctx.globalAlpha=0.7;
-  const cell=size/7;
-  // finder patterns (3 corners)
-  [[0,0],[4,0],[0,4]].forEach(([cx,cy])=>{
-    ctx.strokeStyle=color;
-    ctx.lineWidth=cell*0.15;
-    ctx.strokeRect(x+cx*cell,y+cy*cell,cell*3,cell*3);
-    ctx.fillRect(x+(cx+1)*cell,y+(cy+1)*cell,cell,cell);
-  });
-  // random data cells
-  const cells=[[1,3],[2,4],[3,3],[4,2],[5,3],[3,5],[5,5],[4,4],[6,1],[6,3],[6,5],[2,6],[4,6]];
-  cells.forEach(([cx,cy])=>ctx.fillRect(x+cx*cell+1,y+cy*cell+1,cell-2,cell-2));
-  ctx.restore();
-}
-
-function parseGradientStops(grad){
-  // Extract hex/rgb colors from gradient string
-  const colors=[];
-  const matches=grad.match(/#[0-9a-fA-F]{3,6}|rgb\([^)]+\)|rgba\([^)]+\)/g)||['#0a0a14','#12122a'];
-  matches.forEach((c,i)=>colors.push({pos:i/(Math.max(matches.length-1,1)),color:c}));
-  return colors;
-}
-
-function parseGradientAngle(grad){
-  const m=grad.match(/(\d+)deg/);
-  return m?parseInt(m[1]):135;
-}
-
-document.getElementById('paymentModal').addEventListener('click',function(e){if(e.target===this)closePaymentModal();});
-
-// ─── FAQ ───
-function toggleFaq(el){
-  const item=el.parentElement;
-  const open=item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!open) item.classList.add('open');
-}
-
-// ─── roundRect polyfill for older browsers ───
-if(!CanvasRenderingContext2D.prototype.roundRect){
-  CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){
-    r=Math.min(r,w/2,h/2);
-    this.beginPath();
-    this.moveTo(x+r,y);
-    this.lineTo(x+w-r,y);
-    this.quadraticCurveTo(x+w,y,x+w,y+r);
-    this.lineTo(x+w,y+h-r);
-    this.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-    this.lineTo(x+r,y+h);
-    this.quadraticCurveTo(x,y+h,x,y+h-r);
-    this.lineTo(x,y+r);
-    this.quadraticCurveTo(x,y,x+r,y);
-    this.closePath();
-    return this;
-  };
-}
-</script>
-</body>
-</html>
+    inner=`<div style="position:relative;z-index:2;"><div style="display:flex;gap:12px;align-items:center;margin-bottom:12px;">${avH(avSz,'12px',s.ab)}<div><div style="${nm}">${u.name||'Your Name'}</div><div style="${rm}">${u.role||'Designation'}</div></div></div><div style="background:rgba(255,255,255,.07);border-radius:8px;padding:8px 10px;margin-bottom:8px;"><div style="${ct};margin-bottom:3px;">${u.phone||'+91 98765 43210'}</div><div style="font-size:9px;color:${s.tc};opacity:.6;font-family:${s.font};">${u.emai
